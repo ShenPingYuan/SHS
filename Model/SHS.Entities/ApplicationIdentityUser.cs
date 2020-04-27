@@ -11,6 +11,6 @@ namespace SHS.Entities
         public string RoleName { get; set; }
         public string UserFaceImgUrl { get; set; }
         public string UserDescription { get; set; }
-        //public Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }
