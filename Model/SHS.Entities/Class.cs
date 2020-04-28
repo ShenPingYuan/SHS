@@ -24,7 +24,10 @@ namespace SHS.Entities
         /// 辅导员教职工号
         /// </summary>
         public int InstructorId { get; set; }
-        public Teacher Instructor { get; set; }
+        /// <summary>
+        /// 辅导员名字
+        /// </summary>
+        public string InstructorName { get; set; }
         public int CollegeId { get; set; }
         public College College { get; set; }
 

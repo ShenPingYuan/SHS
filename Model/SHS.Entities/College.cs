@@ -36,7 +36,6 @@ namespace SHS.Entities
         /// 院长名字
         /// </summary>
         public string DeanName { get; set; }
-        public Teacher Dean { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<Class> Classes { get; set; }
     }
