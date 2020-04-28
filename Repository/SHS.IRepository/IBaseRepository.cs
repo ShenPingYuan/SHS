@@ -21,7 +21,8 @@ namespace SHS.IRepository
         bool EditEntity(T entity);
         T AddEntity(T entity);
         //以下接口为上面接口的异步接口
-        //Task<bool> DeleteEntityAsync(T entity);
-        //Task<bool> EditEntityAsync(T entity);
+        Task<bool> DeleteEntityAsync(T entity);
+        Task<bool> EditEntityAsync(T entity);
+        Task<T> AddEntityAsync(T entity);
     }
 }

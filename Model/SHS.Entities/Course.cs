@@ -9,7 +9,7 @@ namespace SHS.Entities
     {
         public Course()
         {
-            StudentCourse = new HashSet<Student_Course>();
+            StudentCourse = new HashSet<StudentCourse>();
             Teachers = new HashSet<Teacher>();
         }
         [Key]
@@ -17,7 +17,7 @@ namespace SHS.Entities
         public string CourseName { get; set; }
         public string EnglishName { get; set; }
         public string CourseScore { get; set; }
-        public virtual ICollection<Student_Course> StudentCourse { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourse { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

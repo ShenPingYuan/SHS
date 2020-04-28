@@ -9,7 +9,7 @@ namespace SHS.Entities
     {
         public Student()
         {
-            StudentCourse = new HashSet<Student_Course>();
+            StudentCourse = new HashSet<StudentCourse>();
         }
         /// <summary>
         /// 学号
@@ -61,6 +61,6 @@ namespace SHS.Entities
         /// </summary>
         public string Area { get; set; }
         public virtual Class Class { get; set; }
-        public virtual ICollection<Student_Course> StudentCourse { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourse { get; set; }
     }
 }

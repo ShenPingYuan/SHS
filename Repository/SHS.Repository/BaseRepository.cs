@@ -12,11 +12,11 @@ namespace SHS.Repository
     /// 公共增删改查方法实现类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseManager<T> where T : class, new()
+    public class BaseRepository<T> where T : class, new()
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public BaseManager(ApplicationDbContext dbContext)
+        public BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -48,7 +48,10 @@ namespace SHS.Repository
         {
             return _dbContext.Set<T>();
         }
-        public IQueryable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount, Expression<Func<T, bool>> whereLambdaExpression, Expression<Func<T, S>> orderByLambdaExpression, bool isAsc)
+        public IQueryable<T> LoadPageEntities<S>(int pageIndex,
+            int pageSize, out int totalCount,
+            Expression<Func<T, bool>> whereLambdaExpression,
+            Expression<Func<T, S>> orderByLambdaExpression, bool isAsc)
         {
             var tem = _dbContext.Set<T>().Where(whereLambdaExpression);
             totalCount = tem.Count();
@@ -63,11 +66,28 @@ namespace SHS.Repository
             return tem;
         }
         //以下方法为上面方法的异步实现
-        //public async Task<T> AddEntityAsync(T entity)
-        //{
-        //    _dbContext.Set<T>().Add(entity);
-        //    await _dbContext.SaveChangesAsync();
-        //    return entity;
-        //}
+        public async Task<T> AddEntityAsync(T entity)
+        {
+            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
+        }
+        public async Task<bool> DeleteEntityAsync(T entity)
+        {
+            await Task.Run(() =>
+            {
+                _dbContext.Set<T>().Remove(entity);
+            });
+            return await _dbContext.SaveChangesAsync() > 0;
+
+        }
+        public async Task<bool> EditEntityAsync(T entity)
+        {
+            await Task.Run(() =>
+            {
+                _dbContext.Set<T>().Update(entity);
+            });
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
     }
 }

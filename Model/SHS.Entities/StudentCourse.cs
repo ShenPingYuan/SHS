@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SHS.Entities
 {
-    public partial class Student_Course
+    public partial class StudentCourse
     {
         public int StudentId { get; set; }
         public int CourseId { get; set; }

@@ -90,7 +90,7 @@ namespace SHS.Data
                     .IsUnicode(false);
             });
 
-            builder.Entity<Student_Course>(entity =>
+            builder.Entity<StudentCourse>(entity =>
             {
                 entity.HasKey(e => new { e.StudentId, e.CourseId });
 
@@ -194,7 +194,7 @@ namespace SHS.Data
         }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Student_Course> Student_Courses { get; set; }
+        public virtual DbSet<StudentCourse> Student_Courses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
     }

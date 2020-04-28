@@ -35,13 +35,10 @@ namespace SHS.Entities
         /// 出生日期
         /// </summary>
         public string Birthday { get; set; }
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
         public int? ColleageId { get; set; }
         public College College { get; set; }
-        /// <summary>
-        /// 老师教授课程编号
-        /// </summary>
-        public int? CourseId { get; set; }
-        public virtual Course Course { get; set; }
         /// <summary>
         /// 家庭地址/省
         /// </summary>
