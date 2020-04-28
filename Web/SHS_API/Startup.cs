@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SHS.Data;
+using SHS.Entities;
 
 namespace SHS_API
 {
@@ -26,6 +29,14 @@ namespace SHS_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
+                    b => b.MigrationsAssembly("SHS.Data"));
+                options.EnableSensitiveDataLogging(true);//打开敏感数据记录
+            });
+            services.AddIdentity<ApplicationIdentityUser, ApplicationIdentityRole>(options => { }).AddEntityFrameworkStores<ApplicationDbContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

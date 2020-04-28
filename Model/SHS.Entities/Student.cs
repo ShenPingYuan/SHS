@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace SHS.Entities
@@ -8,18 +9,45 @@ namespace SHS.Entities
     {
         public Student()
         {
-            Sc = new HashSet<Student_Course>();
+            StudentCourse = new HashSet<Student_Course>();
         }
-
-        public int Sno { get; set; }
-        public string Sname { get; set; }
+        /// <summary>
+        /// 学号
+        /// </summary>
+        [Key]
+        public int StudentId { get; set; }
+        /// <summary>
+        /// 学生名字
+        /// </summary>
+        public string StudentName { get; set; }
+        /// <summary>
+        /// 学生英文名
+        /// </summary>
         public string EnglishName { get; set; }
+        /// <summary>
+        /// 性别
+        /// </summary>
         public string Sex { get; set; }
+        /// <summary>
+        /// 出生日期
+        /// </summary>
         public string Birthday { get; set; }
+        /// <summary>
+        /// 学生头像链接
+        /// </summary>
+        public string UserFaceImgUrl { get; set; }
+        /// <summary>
+        /// 年级
+        /// </summary>
         public int? Year { get; set; }
+        /// <summary>
+        /// 班级Id
+        /// </summary>
         public int? ClassId { get; set; }
-        public string Character { get; set; }
-        public string Pwd { get; set; }
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
         /// <summary>
         /// 家庭地址/省
         /// </summary>
@@ -32,7 +60,7 @@ namespace SHS.Entities
         /// 家庭地址/区
         /// </summary>
         public string Area { get; set; }
-        public virtual Class ClassNavigation { get; set; }
-        public virtual ICollection<Student_Course> Sc { get; set; }
+        public virtual Class Class { get; set; }
+        public virtual ICollection<Student_Course> StudentCourse { get; set; }
     }
 }

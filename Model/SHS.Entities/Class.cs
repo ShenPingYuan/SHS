@@ -9,13 +9,25 @@ namespace SHS.Entities
     {
         public Class()
         {
-            TbStudent = new HashSet<Student>();
+            Students = new HashSet<Student>();
         }
+        /// <summary>
+        /// 班级号
+        /// </summary>
         [Key]
         public int ClassId { get; set; }
+        /// <summary>
+        /// 班级名字
+        /// </summary>
         public string ClassName { get; set; }
-        public string Dean { get; set; }
+        /// <summary>
+        /// 辅导员教职工号
+        /// </summary>
+        public int InstructorId { get; set; }
+        public Teacher Instructor { get; set; }
+        public int CollegeId { get; set; }
+        public College College { get; set; }
 
-        public virtual ICollection<Student> TbStudent { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace SHS.Entities
 {
     public class ApplicationIdentityUser : IdentityUser
     {
-        public int TId { get; set; }
+        public int TeacherId { get; set; }
         public string RoleName { get; set; }
         public string UserFaceImgUrl { get; set; }
         public string UserDescription { get; set; }
