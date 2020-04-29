@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Entities", "Model\SHS.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Dtos", "Model\SHS.Dtos\SHS.Dtos.csproj", "{5AE4EF77-6193-457B-BC44-4381951866B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHS.IRepository", "Repository\SHS.IRepository\SHS.IRepository.csproj", "{DC38A284-9DB9-471F-B7FE-0F2B9303284B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.IRepository", "Repository\SHS.IRepository\SHS.IRepository.csproj", "{DC38A284-9DB9-471F-B7FE-0F2B9303284B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHS.Repository", "Repository\SHS.Repository\SHS.Repository.csproj", "{270F9C22-65A7-42A2-89E6-2BC65C459A76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Repository", "Repository\SHS.Repository\SHS.Repository.csproj", "{270F9C22-65A7-42A2-89E6-2BC65C459A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHS.Web", "Web\SHS.Web\SHS.Web.csproj", "{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{270F9C22-65A7-42A2-89E6-2BC65C459A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{270F9C22-65A7-42A2-89E6-2BC65C459A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{270F9C22-65A7-42A2-89E6-2BC65C459A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{5AE4EF77-6193-457B-BC44-4381951866B7} = {E5EAC882-63ED-40A9-9A94-8271EE312619}
 		{DC38A284-9DB9-471F-B7FE-0F2B9303284B} = {57585F0A-FB70-4C1B-8E91-EA2B383B440B}
 		{270F9C22-65A7-42A2-89E6-2BC65C459A76} = {57585F0A-FB70-4C1B-8E91-EA2B383B440B}
+		{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048} = {431B659A-E304-430F-B70C-D43F38E620FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9DA9038A-A402-4ABA-9777-326E1ABA3FC2}
