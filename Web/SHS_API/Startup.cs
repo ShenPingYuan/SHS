@@ -35,7 +35,8 @@ namespace SHS_API
                     b => b.MigrationsAssembly("SHS.Data"));
                 options.EnableSensitiveDataLogging(true);//打开敏感数据记录
             });
-            services.AddIdentity<ApplicationIdentityUser, ApplicationIdentityRole>(options => { }).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationIdentityUser, ApplicationIdentityRole>(options => { })
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
         }
 

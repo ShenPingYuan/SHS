@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SHS.Data;
+using SHS.Entities;
 
 namespace SHS.Web
 {
@@ -24,6 +27,14 @@ namespace SHS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
+                    b => b.MigrationsAssembly("SHS.Data"));
+                options.EnableSensitiveDataLogging(true);//打开敏感数据记录
+            });
+            services.AddIdentity<ApplicationIdentityUser, ApplicationIdentityRole>(options => { })
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +61,7 @@ namespace SHS.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=LoginPage}/{id?}");
             });
         }
     }
