@@ -19,11 +19,14 @@
     <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
     <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
     <meta name="author" content="Codrops" />
-    <link rel="icon" href="~/favicon.ico">
-    <link rel="icon" sizes="any" mask="" href="~/pen.svg">
+    @*<link rel="icon" href="~/favicon.ico">*@
+    <link rel="icon" sizes="any" mask="" href="~/favicon1.ico">
     <link rel="stylesheet" type="text/css" href="~/css/loginPage/demo.css" />
     <link rel="stylesheet" type="text/css" href="~/css/loginPage/style.css" />
     <link rel="stylesheet" type="text/css" href="~/css/loginPage/animate-custom.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
 </head>
 <body>
     <div class="container">
@@ -41,7 +44,7 @@
                 <a class="hiddenanchor" id="tologin"></a>
                 <div id="wrapper">
                     <div id="login" class="animate form">
-                        <form action="#" autocomplete="on">
+                        <form action="#" autocomplete="on" onsubmit="return false;">
                             <h1>登 陆</h1>
                             <p>
                                 <label for="username" class="uname" data-icon="u"> 账号 </label>
@@ -56,7 +59,8 @@
                                 <label for="loginkeeping">保持登陆</label>
                             </p>
                             <p class="login button">
-                                <input type="submit" value="Login" />
+                                <img src="~/images/loading.gif" class="login-loading" alt="正在登陆..." />
+                                <input type="submit" class="login-submit" value="登陆" />
                             </p>
                             <p class="change_link">
                                 还 没 注 册 ?
@@ -64,7 +68,6 @@
                             </p>
                         </form>
                     </div>
-
                     <div id="register" class="animate form">
                         <form action="#" autocomplete="on">
                             <h1> 注 册 </h1>
@@ -85,7 +88,8 @@
                                 <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="请再次输入密码" />
                             </p>
                             <p class="signin button">
-                                <input type="submit" value="注 册" />
+                                <img src="~/images/loading.gif" class="register-loading" alt="正在注册..." />
+                                <input type="submit" class="register-submit" value="注册" />
                             </p>
                             <p class="change_link">
                                 已经有账号 ?
@@ -93,12 +97,9 @@
                             </p>
                         </form>
                     </div>
-
                 </div>
             </div>
         </section>
     </div>
-
-
 </body>
 </html>
