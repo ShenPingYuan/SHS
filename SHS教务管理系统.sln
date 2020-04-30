@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Repository", "Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Web", "Web\SHS.Web\SHS.Web.csproj", "{233DC2E6-B7CD-45B3-A72C-FD0F3CFDA048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHS.Core", "Infrastructure\SHS.Core\SHS.Core.csproj", "{67D5AB58-6298-4249-B4DF-E9B29F7BB51F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHS.Core", "Infrastructure\SHS.Core\SHS.Core.csproj", "{67D5AB58-6298-4249-B4DF-E9B29F7BB51F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

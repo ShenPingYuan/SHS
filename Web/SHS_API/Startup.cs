@@ -61,11 +61,16 @@ namespace SHS_API
             //    options.Password.RequiredUniqueChars = 1;
 
             //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -76,6 +81,8 @@ namespace SHS_API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("any");
 
             app.UseEndpoints(endpoints =>
             {
