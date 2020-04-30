@@ -334,6 +334,9 @@ namespace SHS.Data.Migrations
                         .HasColumnName("classId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EnglishName")
                         .HasColumnName("englishName")
                         .HasColumnType("varchar(50)")
@@ -377,7 +380,7 @@ namespace SHS.Data.Migrations
                     b.ToTable("tb_student");
                 });
 
-            modelBuilder.Entity("SHS.Entities.Student_Course", b =>
+            modelBuilder.Entity("SHS.Entities.StudentCourse", b =>
                 {
                     b.Property<int>("StudentId")
                         .HasColumnName("studentId")
@@ -537,7 +540,7 @@ namespace SHS.Data.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
-            modelBuilder.Entity("SHS.Entities.Student_Course", b =>
+            modelBuilder.Entity("SHS.Entities.StudentCourse", b =>
                 {
                     b.HasOne("SHS.Entities.Course", "Course")
                         .WithMany("StudentCourse")

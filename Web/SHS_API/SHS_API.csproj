@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\SHS.Data\SHS.Data.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SHS.Core\SHS.Core.csproj" />
     <ProjectReference Include="..\..\Model\SHS.Dtos\SHS.Dtos.csproj" />
     <ProjectReference Include="..\..\Model\SHS.Entities\SHS.Entities.csproj" />
   </ItemGroup>

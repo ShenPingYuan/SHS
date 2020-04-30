@@ -105,8 +105,8 @@ namespace SHS.Data.Migrations
                     englishName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
                     sex = table.Column<string>(maxLength: 10, nullable: true),
                     birthday = table.Column<string>(nullable: true),
-                    ColleageId = table.Column<int>(nullable: true),
                     courseId = table.Column<int>(maxLength: 10, nullable: true),
+                    ColleageId = table.Column<int>(nullable: true),
                     Province = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Area = table.Column<string>(nullable: true)
@@ -137,6 +137,7 @@ namespace SHS.Data.Migrations
                     englishName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     sex = table.Column<string>(unicode: false, maxLength: 10, nullable: true),
                     birthday = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     userFaceImgUrl = table.Column<string>(unicode: false, nullable: true),
                     year = table.Column<int>(nullable: true),
                     classId = table.Column<int>(nullable: true),

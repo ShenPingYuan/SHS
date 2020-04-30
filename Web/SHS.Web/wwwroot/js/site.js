@@ -3,11 +3,11 @@
 
 // Write your JavaScript code.
 $(function () {
-
+    var webApiHost = "https://localhost:5002/";
     $(".login-submit").click(function () {
         $("img.login-loading").css("display", "inline-block");
         $.ajax({
-            url: "/Account/Login",
+            url: webApiHost+"api/Account/LoginApi",
             type: "POST",
             data: {
                 UserName: $(".form-login #username").val(),
@@ -18,11 +18,13 @@ $(function () {
             beforeSend: function (res) {
             },
             success: function (res) {
+                $("img.login-loading").css("display", "none");
                 if (res.code == 0) {
-                    $(".form-login .loading>p").html("登陆成功");
+                    $("input.login-submit").val("登陆成功");
                     setTimeout(' window.location.href = "/Home/Index"', 1000);
                     // window.location.href = "/Home/Index";
                 } else {
+                    $("input.login-submit").val(res.msg);
                     setTimeout('$(".form-login .loading").css("display", "none")', 2000);
                 }
             }

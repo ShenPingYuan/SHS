@@ -35,7 +35,7 @@ namespace SHS.Entities
         /// 出生日期
         /// </summary>
         public string Birthday { get; set; }
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         public Course Course { get; set; }
         public int? ColleageId { get; set; }
         public College College { get; set; }

@@ -33,6 +33,10 @@ namespace SHS.Entities
         /// </summary>
         public string Birthday { get; set; }
         /// <summary>
+        /// 邮箱地址
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
         /// 学生头像链接
         /// </summary>
         public string UserFaceImgUrl { get; set; }
