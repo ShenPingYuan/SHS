@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SHS.Repository
 {
-    class StudentRepository:BaseRepository<Student>,IStudentRepository
+    public class StudentRepository :BaseRepository<Student>,IStudentRepository
     {
         public StudentRepository(ApplicationDbContext dbContext) : base(dbContext) { }
     }

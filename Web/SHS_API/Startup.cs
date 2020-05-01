@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SHS.Data;
 using SHS.Entities;
+using SHS.IRepository;
+using SHS.Repository;
 
 namespace SHS_API
 {
@@ -65,8 +67,8 @@ namespace SHS_API
             {
                 options.AddPolicy("any", o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

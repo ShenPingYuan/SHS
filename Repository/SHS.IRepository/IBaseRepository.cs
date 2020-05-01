@@ -24,5 +24,6 @@ namespace SHS.IRepository
         Task<bool> DeleteEntityAsync(T entity);
         Task<bool> EditEntityAsync(T entity);
         Task<T> AddEntityAsync(T entity);
+        Task<int> GetCountAsync(T entity);
     }
 }

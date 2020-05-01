@@ -1,4 +1,5 @@
-﻿using SHS.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SHS.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,5 +90,6 @@ namespace SHS.Repository
             });
             return await _dbContext.SaveChangesAsync() > 0;
         }
+        public async Task<int> GetCountAsync(T entity)=>await _dbContext.Set<T>().CountAsync<T>();
     }
 }

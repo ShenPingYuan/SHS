@@ -17,6 +17,7 @@
     <ProjectReference Include="..\..\Infrastructure\SHS.Core\SHS.Core.csproj" />
     <ProjectReference Include="..\..\Model\SHS.Dtos\SHS.Dtos.csproj" />
     <ProjectReference Include="..\..\Model\SHS.Entities\SHS.Entities.csproj" />
+    <ProjectReference Include="..\..\Repository\SHS.Repository\SHS.Repository.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

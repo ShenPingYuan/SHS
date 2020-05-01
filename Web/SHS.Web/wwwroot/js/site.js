@@ -82,10 +82,16 @@ $(function () {
             $(".form-register input[name='passwordsignup_confirm']").val() == "") {
             return true;
         }
-        if ($(".form-register input[name='passwordsignup_confirm']").val() != $(".form-register input[name='passwordsignup_confirm']").val()) {
+        if ($(".form-register input[name='passwordsignup']").val() != $(".form-register input[name='passwordsignup_confirm']").val()) {
+
             $("input.register-submit").val("两密码不同");
-            setTimeout('$("input.register-submit").val("注册")', 2000);
-            return false;
+            $("input.register-submit").css("color", "#ffd475");
+            setTimeout(function () {
+                $("input.register-submit").val("注册");
+                $("input.register-submit").css("color", "white");
+            }, 2000);
+            //setTimeout('$("input.register-submit").val("注册")', 2000);
+            return true;
         }
         $("img.register-loading").css("display", "inline-block");
         
@@ -93,7 +99,7 @@ $(function () {
             url: webApiHost + "api/Account/RegisterApi",
             type: "POST",
             data: JSON.stringify({
-                "username": $(".form-register input[name='username']").val(),
+                "userName": $(".form-register input[name='usernamesignup']").val(),
                 "password": $(".form-register input[name='passwordsignup']").val(),
                 "email": $(".form-register input[name='emailsignup']").val(),
 
@@ -107,11 +113,16 @@ $(function () {
                 $("img.register-loading").css("display", "none");
                 if (res.code == 0) {
                     $("input.register-submit").val("注册成功");
-                    setTimeout(' window.location.href = "/Home/Index"', 1000);
+                    $("input.register-submit").css("color", "#6dff3e");
+                    setTimeout('window.location.href = "/#tologin"', 1000);
                     // window.location.href = "/Home/Index";
                 } else {
                     $("input.register-submit").val(res.msg);
-                    setTimeout('$("input.register-submit").val("注册")', 2000);
+                    $("input.register-submit").css("color", "#ffd475");
+                    setTimeout(function () {
+                        $("input.register-submit").val("注册");
+                        $("input.register-submit").css("color", "white");
+                    }, 2000);
                 }
             },
             error: function (res) {
