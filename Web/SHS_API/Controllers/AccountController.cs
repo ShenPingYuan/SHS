@@ -51,15 +51,6 @@ namespace SHS_API.Controllers
             }
             return new ResultData(ReturnCode.Error, -1, "密码错误", null);
         }
-        public static string Text(int id)
-        {
-            if (id > 0)
-            {
-                id++;
-            }
-            id--;
-            return Convert.ToString(id).Substring(0);
-        }
         [HttpPost]
         [Route("RegisterApi")]
         public async Task<ActionResult<ResultData>> Register([FromBody] UserRegisterDto userDto)
@@ -70,14 +61,14 @@ namespace SHS_API.Controllers
                 return new ResultData(ReturnCode.Error, -1, "用户已经存在", null);
             }
             string today = DateTime.Now.ToString("yyyyMMdd");
-            var lastTeacher =_teacherRepository
+            var lastTeacher = _teacherRepository
                 .LoadEntities(o => o.TeacherId.ToString().StartsWith(today))
                 .LastOrDefault();
             int teacherId;
-            
+
             if (lastTeacher == null)
             {
-                teacherId = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd") + "00");
+                teacherId = Convert.ToInt32(today + "00");
             }
             else
             {
@@ -85,7 +76,15 @@ namespace SHS_API.Controllers
                 int index = Convert.ToInt32(lastTwoChar.StartsWith("0") ? lastTwoChar.Substring(1, 1) : lastTwoChar);
                 if (index < 99)
                 {
-                    teacherId = index + 1;
+                    index++;
+                    if (index.ToString().Length == 1)
+                    {
+                        teacherId =Convert.ToInt32(today+"0"+index.ToString());
+                    }
+                    else
+                    {
+                        teacherId = Convert.ToInt32(today + index.ToString());
+                    }
                 }
                 else
                 {
