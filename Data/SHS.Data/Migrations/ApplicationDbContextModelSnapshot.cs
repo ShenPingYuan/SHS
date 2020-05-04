@@ -406,10 +406,8 @@ namespace SHS.Data.Migrations
             modelBuilder.Entity("SHS.Entities.Teacher", b =>
                 {
                     b.Property<int>("TeacherId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnName("teachenrId")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Area")
                         .HasColumnType("nvarchar(max)");

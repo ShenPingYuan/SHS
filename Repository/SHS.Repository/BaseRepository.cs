@@ -41,15 +41,15 @@ namespace SHS.Repository
             return _dbContext.SaveChanges() > 0;
         }
 
-        public IQueryable<T> LoadEntities(Expression<Func<T, bool>> whereLambdaExpression)
+        public IEnumerable<T> LoadEntities(Expression<Func<T, bool>> whereLambdaExpression)
         {
             return _dbContext.Set<T>().Where(whereLambdaExpression);
         }
-        public IQueryable<T> GetAllEntities()
+        public IEnumerable<T> GetAllEntities()
         {
             return _dbContext.Set<T>();
         }
-        public IQueryable<T> LoadPageEntities<S>(int pageIndex,
+        public IEnumerable<T> LoadPageEntities<S>(int pageIndex,
             int pageSize, out int totalCount,
             Expression<Func<T, bool>> whereLambdaExpression,
             Expression<Func<T, S>> orderByLambdaExpression, bool isAsc)

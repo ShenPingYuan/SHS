@@ -12,9 +12,9 @@ namespace SHS.IRepository
     /// <typeparam name="T">接口泛型</typeparam>
     public interface IBaseRepository<T> where T : class, new()
     {
-        IQueryable<T> LoadEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression);
-        IQueryable<T> GetAllEntities();
-        IQueryable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount,
+        IEnumerable<T> LoadEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression);
+        IEnumerable<T> GetAllEntities();
+        IEnumerable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount,
             System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression,
             System.Linq.Expressions.Expression<Func<T, S>> orderByLambdaExpression, bool isAsc);
         bool DeleteEntity(T entity);

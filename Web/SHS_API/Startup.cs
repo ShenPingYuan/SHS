@@ -42,6 +42,10 @@ namespace SHS_API
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
                     b => b.MigrationsAssembly("SHS.Data"));
                 options.EnableSensitiveDataLogging(true);//打开敏感数据记录
+                options.UseLoggerFactory(LoggerFactory.Create(config =>
+                {
+                    config.AddConsole();
+                }));
             });
             services.AddIdentity<ApplicationIdentityUser, ApplicationIdentityRole>(options => 
             {

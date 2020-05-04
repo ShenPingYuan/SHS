@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SHS.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SHS.Data
 {
@@ -13,6 +11,10 @@ namespace SHS.Data
         {
 
         }
+        public static readonly ILoggerFactory SHS_EFLoggerFactory = LoggerFactory.Create(config =>
+        {
+            config.AddConsole();
+        });
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
