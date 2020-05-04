@@ -26,7 +26,7 @@
     <!-- 顶部开始 -->
     <div class="container">
         <div class="logo">
-            <a href="#">SHS-后台管理系统</a>
+            <a href="">SHS-后台管理系统</a>
         </div>
         <div class="left_open">
             <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
@@ -66,17 +66,39 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
-                <a href="javascript:;">admin</a>
+                <!-- <a href="javascript:;">admin</a> -->
+                <a href="javascript:;">
+                    <img src="" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">欢迎 @User.Identity.Name!</cite>
+                </a>
                 <dl class="layui-nav-child">
                     <!-- 二级菜单 -->
+                    <!-- <dd><a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+            <dd><a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+            <dd><a onclick="xadmin.open('修改密码','http://www.baidu.com')">个人信息</a></dd>
+            <dd><a href="./login.html">退出</a></dd> -->
                     <dd>
-                        <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a>
+                        <a onclick="xadmin.open('个人信息','http://www.baidu.com')">
+                            <i class="layui-icon">&#xe612;</i>
+                            <cite>个人资料</cite>
+                            <span class="layui-badge-dot"></span>
+                        </a>
                     </dd>
+                    <dd><a onclick="xadmin.open('切换帐号','http://www.baidu.com')"><i class="layui-icon">&#xe673;</i><cite>修改密码</cite></a></dd>
                     <dd>
-                        <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a>
+                        <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">
+                            <i class="layui-icon">&#xe645;</i>
+                            <cite>系统公告</cite>
+                            <span class="layui-badge-dot"></span>
+                        </a>
                     </dd>
+                    <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite><span class="layui-badge-dot"></span></a></dd>
+                    <dd pc><a href="javascript:;" class="changeSkin"><i class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
                     <dd>
-                        <a href="./login.html">退出</a>
+                        <form asp-controller="Account" asp-action="LogOutApi" method="post" id="logout-form">
+                            <a class="signOut" href="javascript:document.getElementById('logout-form').submit()">
+                                <i class="layui-icon">&#x1006;</i><cite>退出</cite>
+                            </a>
+                        </form>
                     </dd>
                 </dl>
             </li>
@@ -99,25 +121,25 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                            <a onclick="xadmin.add_tab('统计页面','/html/welcome1.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>统计页面</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
+                            <a onclick="xadmin.add_tab('会员列表(静态表格)','/html/member-list.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>会员列表(静态表格)</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">
+                            <a onclick="xadmin.add_tab('会员列表(动态表格)','/html/member-list1.html',true)">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>会员列表(动态表格)</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                            <a onclick="xadmin.add_tab('会员删除','/html/member-del.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>会员删除</cite>
                             </a>
@@ -130,13 +152,13 @@
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                    <a onclick="xadmin.add_tab('会员删除','/html/member-del.html')">
                                         <i class="iconfont">&#xe6a7;</i>
                                         <cite>会员删除</cite>
                                     </a>
                                 </li>
                                 <li>
-                                    <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
+                                    <a onclick="xadmin.add_tab('等级管理','/html/member-list1.html')">
                                         <i class="iconfont">&#xe6a7;</i>
                                         <cite>等级管理</cite>
                                     </a>
@@ -153,13 +175,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                            <a onclick="xadmin.add_tab('订单列表','/html/order-list.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>订单列表</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                            <a onclick="xadmin.add_tab('订单列表1','/html/order-list1.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>订单列表1</cite>
                             </a>
@@ -174,7 +196,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('多级分类','cate.html')">
+                            <a onclick="xadmin.add_tab('多级分类','/html/cate.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>多级分类</cite>
                             </a>
@@ -189,7 +211,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('三级地区联动','city.html')">
+                            <a onclick="xadmin.add_tab('三级地区联动','/html/city.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>三级地区联动</cite>
                             </a>
@@ -204,25 +226,25 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                            <a onclick="xadmin.add_tab('管理员列表','/html/admin-list.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>管理员列表</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('角色管理','admin-role.html')">
+                            <a onclick="xadmin.add_tab('角色管理','/html/admin-role.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>角色管理</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('权限分类','admin-cate.html')">
+                            <a onclick="xadmin.add_tab('权限分类','/html/admin-cate.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>权限分类</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('权限管理','admin-rule.html')">
+                            <a onclick="xadmin.add_tab('权限管理','/html/admin-rule.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>权限管理</cite>
                             </a>
@@ -237,49 +259,49 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+                            <a onclick="xadmin.add_tab('拆线图','/html/echarts1.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>拆线图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
+                            <a onclick="xadmin.add_tab('拆线图','/html/echarts2.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>拆线图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('地图','echarts3.html')">
+                            <a onclick="xadmin.add_tab('地图','/html/echarts3.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>地图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('饼图','echarts4.html')">
+                            <a onclick="xadmin.add_tab('饼图','/html/echarts4.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>饼图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
+                            <a onclick="xadmin.add_tab('雷达图','/html/echarts5.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>雷达图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('k线图','echarts6.html')">
+                            <a onclick="xadmin.add_tab('k线图','/html/echarts6.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>k线图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('热力图','echarts7.html')">
+                            <a onclick="xadmin.add_tab('热力图','/html/echarts7.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>热力图</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
+                            <a onclick="xadmin.add_tab('仪表图','/html/echarts8.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>仪表图</cite>
                             </a>
@@ -294,7 +316,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
+                            <a onclick="xadmin.add_tab('图标对应字体','/html/unicode.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>图标对应字体</cite>
                             </a>
@@ -315,19 +337,19 @@
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('错误页面','error.html')">
+                            <a onclick="xadmin.add_tab('错误页面','/html/error.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>错误页面</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('示例页面','demo.html')">
+                            <a onclick="xadmin.add_tab('示例页面','/html/demo.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>示例页面</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('更新日志','log.html')">
+                            <a onclick="xadmin.add_tab('更新日志','/html/log.html')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>更新日志</cite>
                             </a>
@@ -407,7 +429,7 @@
             </div>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    <iframe src='~/html/welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
                 </div>
             </div>
             <div id="tab_show"></div>
