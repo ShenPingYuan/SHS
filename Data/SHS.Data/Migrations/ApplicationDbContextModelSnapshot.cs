@@ -312,6 +312,9 @@ namespace SHS.Data.Migrations
                     b.Property<string>("EnglishName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsCompulsory")
+                        .HasColumnType("bit");
+
                     b.HasKey("CourseId");
 
                     b.ToTable("tb_course");

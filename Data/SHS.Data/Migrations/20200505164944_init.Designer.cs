@@ -10,7 +10,7 @@ using SHS.Data;
 namespace SHS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200502035707_init")]
+    [Migration("20200505164944_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,9 @@ namespace SHS.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("NickName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -310,6 +313,9 @@ namespace SHS.Data.Migrations
 
                     b.Property<string>("EnglishName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsCompulsory")
+                        .HasColumnType("bit");
 
                     b.HasKey("CourseId");
 

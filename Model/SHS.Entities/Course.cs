@@ -17,6 +17,7 @@ namespace SHS.Entities
         public string CourseName { get; set; }
         public string EnglishName { get; set; }
         public string CourseScore { get; set; }
+        public bool? IsCompulsory { get; set; }
         public virtual ICollection<StudentCourse> StudentCourse { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
     }

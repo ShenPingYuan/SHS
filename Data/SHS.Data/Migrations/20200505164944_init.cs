@@ -44,7 +44,8 @@ namespace SHS.Data.Migrations
                     courseId = table.Column<int>(nullable: false),
                     courseName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     EnglishName = table.Column<string>(nullable: true),
-                    CourseScore = table.Column<string>(nullable: true)
+                    CourseScore = table.Column<string>(nullable: true),
+                    IsCompulsory = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -177,6 +178,7 @@ namespace SHS.Data.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     TeacherId = table.Column<int>(nullable: false),
                     RoleName = table.Column<string>(nullable: true),
+                    NickName = table.Column<string>(nullable: true),
                     UserFaceImgUrl = table.Column<string>(nullable: true),
                     UserDescription = table.Column<string>(nullable: true)
                 },
