@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SHS.Web.Controllers
+namespace SHS.Web.MVCControllers.Controllers
 {
+    [Authorize]
     public class HomeController:Controller
     {
         public IActionResult Index()

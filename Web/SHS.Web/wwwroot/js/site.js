@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 $(function () {
-    var webApiHost = "https://localhost:5002/";
+    var webApiHost = "https://localhost:5001/";
     $(".login-submit").click(function () {
         if ($(".form-login input[name='username']").val() == "" ||
             $(".form-login input[name='password']").val() == "") {

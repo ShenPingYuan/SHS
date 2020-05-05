@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SHS.Entities;
 
-namespace SHS.Web.Controllers
+namespace SHS.Web.MVCControllers.Controllers
 {
     public class AccountController : Controller
     {
@@ -21,9 +22,10 @@ namespace SHS.Web.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        public IActionResult LoginPage()
+        public IActionResult LoginRegister()
         {
             return View();
         }
+
     }
 }

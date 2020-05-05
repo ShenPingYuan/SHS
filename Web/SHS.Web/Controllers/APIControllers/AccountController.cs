@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SHS.Core;
-using SHS.Data;
 using SHS.Dtos;
 using SHS.Entities;
 using SHS.IRepository;
 
-namespace SHS_API.Controllers
+namespace SHS.Web.APIControllers.Controllers
 {
-    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -79,7 +74,7 @@ namespace SHS_API.Controllers
                     index++;
                     if (index.ToString().Length == 1)
                     {
-                        teacherId =Convert.ToInt32(today+"0"+index.ToString());
+                        teacherId = Convert.ToInt32(today + "0" + index.ToString());
                     }
                     else
                     {
