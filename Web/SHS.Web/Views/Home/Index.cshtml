@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using SHS.Entities
+@model SHS.Dtos.HomeViewModel
 @inject SignInManager<ApplicationIdentityUser> SignInManager
 @inject UserManager<ApplicationIdentityUser> UserManager
 <!doctype html>
@@ -15,7 +16,9 @@
     <link rel="stylesheet" href="~/css/xadmin.css">
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
     <script src="~/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/xadmin.js"></script>
+    <script src="~/js/site.js?_=@DateTime.Now"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -74,11 +77,15 @@
                 <li class="layui-nav-item">
                     <!-- <a href="javascript:;">admin</a> -->
                     <a href="javascript:;">
-                        <img src="" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">欢迎 @User.Identity.Name!</cite>
+                        @{
+                            string Name = (Model.NickName != null) ? Model.NickName : User.Identity.Name;
+                            string UserAvatarUrl = (Model.UserAvatarUrl != null) ? Model.UserAvatarUrl : "http://q1.qlogo.cn/g?b=qq&nk=2439739932&s=640";
+                            <img src=@UserAvatarUrl class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">@Name</cite>
+                        }
                     </a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">
+                            <a onclick="xadmin.open('个人信息','/html/UserInfo.html')">
                                 <i class="layui-icon">&#xe612;</i>
                                 <cite>个人资料</cite>
                                 <span class="layui-badge-dot"></span>
@@ -95,11 +102,11 @@
                         <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite><span class="layui-badge-dot"></span></a></dd>
                         <dd pc><a href="javascript:;" class="changeSkin"><i class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
                         <dd>
-                            <form asp-controller="Account" asp-action="LogOutApi" method="post" id="logout-form">
-                                <a class="signOut" href="javascript:document.getElementById('logout-form').submit()">
+                            @*<form asp-action="LogOutApi" asp-controller="Account" method="post" id="logout-form">*@
+                                <a class="signOut" href="javascript:;">
                                     <i class="layui-icon">&#x1006;</i><cite>退出</cite>
                                 </a>
-                            </form>
+                            @*</form>*@
                         </dd>
                     </dl>
                 </li>

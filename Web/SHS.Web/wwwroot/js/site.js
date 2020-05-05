@@ -62,7 +62,7 @@ $(function () {
             return true;
         }
         $("img.register-loading").css("display", "inline-block");
-        
+
         $.ajax({
             url: webApiHost + "api/Account/RegisterApi",
             type: "POST",
@@ -97,5 +97,18 @@ $(function () {
                 window.location.href = "/html/error.html";
             }
         });
-    })
+    });
+    $("a.signOut").click(function () {
+        $.ajax({
+            url: "/api/Account/logOutApi",
+            method: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (res) {
+                window.location.href = "/Account/LoginRegister";
+            },
+            error: function (res) {
+                window.location.href = "/html/error.html";
+            }
+        });
+    });
 })

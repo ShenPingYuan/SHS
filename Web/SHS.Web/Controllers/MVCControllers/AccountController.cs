@@ -26,6 +26,5 @@ namespace SHS.Web.MVCControllers.Controllers
         {
             return View();
         }
-
     }
 }

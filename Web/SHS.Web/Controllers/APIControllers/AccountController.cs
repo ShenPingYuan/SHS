@@ -102,9 +102,9 @@ namespace SHS.Web.APIControllers.Controllers
             }
             return new ResultData(ReturnCode.Error, -1, "注册失败", null);
         }
-        [HttpGet]
+        [HttpPost]
         [Route("LogOutApi")]
-        public async Task LogOut()
+        public async Task LogOutApi()
         {
             await _signInManager.SignOutAsync();
         }

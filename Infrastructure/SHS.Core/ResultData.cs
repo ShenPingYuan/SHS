@@ -13,6 +13,15 @@ namespace SHS.Core
             Msg = msg;
             Data = data;
         }
+        public ResultData(ReturnCode code, int count, string msg, object data)
+        {
+            Datas = new List<object>();
+            Code = code;
+            Count = count;
+            Msg = msg;
+            Data = data;
+        }
+        public object Data { get; set; }
         /// <summary>
         /// 返回码
         /// </summary>
@@ -28,6 +37,6 @@ namespace SHS.Core
         /// <summary>
         /// 返回的实际数据
         /// </summary>
-        public IEnumerable<object> Data { get; set; }
+        public IEnumerable<object> Datas { get; set; }
     }
 }
