@@ -10,7 +10,7 @@ using SHS.Data;
 namespace SHS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200505164944_init")]
+    [Migration("20200506154011_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,9 +177,6 @@ namespace SHS.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -197,9 +194,6 @@ namespace SHS.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RoleName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -208,12 +202,6 @@ namespace SHS.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserFaceImgUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
@@ -444,6 +432,9 @@ namespace SHS.Data.Migrations
                     b.Property<string>("NickName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Province")
                         .HasColumnType("nvarchar(max)");
 
@@ -457,6 +448,15 @@ namespace SHS.Data.Migrations
                         .HasColumnType("varchar(30)")
                         .HasMaxLength(30)
                         .IsUnicode(false);
+
+                    b.Property<string>("UserDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserFaceImgUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TeacherId");
 

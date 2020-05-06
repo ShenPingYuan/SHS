@@ -30,6 +30,22 @@ namespace SHS.Entities
         /// </summary>
         public string EnglishName { get; set; }
         /// <summary>
+        /// 用户邮箱
+        /// </summary>
+        public string UserEmail { get; set; }
+        /// <summary>
+        /// 头像地址
+        /// </summary>
+        public string UserFaceImgUrl { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string UserDescription { get; set; }
+        /// <summary>
+        /// 电话号码
+        /// </summary>
+        public string PhoneNumber { get; set; }
+        /// <summary>
         /// 性别
         /// </summary>
         public string Sex { get; set; }

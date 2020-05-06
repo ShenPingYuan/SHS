@@ -7,11 +7,10 @@ layui.use(['form','layer','upload','laydate'],function(){
         laydate = layui.laydate;
 
     $.ajax({
-        url: "",
+        url: "/api/Account/userinfo/current",
         method: "GET",
-        
         success: function (res) {
-
+            alert("收到数据");
         },
         error: function (res) {
             

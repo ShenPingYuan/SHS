@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -44,6 +45,7 @@ namespace SHS.Web
                 //setup.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
             }).AddXmlDataContractSerializerFormatters();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
@@ -72,6 +74,7 @@ namespace SHS.Web
                 options.AddPolicy("any", o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
             services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings

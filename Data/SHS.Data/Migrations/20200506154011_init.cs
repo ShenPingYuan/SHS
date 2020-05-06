@@ -103,6 +103,10 @@ namespace SHS.Data.Migrations
                     teacherName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
                     NickName = table.Column<string>(nullable: true),
                     englishName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
+                    UserEmail = table.Column<string>(nullable: true),
+                    UserFaceImgUrl = table.Column<string>(nullable: true),
+                    UserDescription = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     sex = table.Column<string>(maxLength: 10, nullable: true),
                     birthday = table.Column<string>(nullable: true),
                     courseId = table.Column<int>(maxLength: 10, nullable: true),
@@ -176,11 +180,7 @@ namespace SHS.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false),
-                    RoleName = table.Column<string>(nullable: true),
-                    NickName = table.Column<string>(nullable: true),
-                    UserFaceImgUrl = table.Column<string>(nullable: true),
-                    UserDescription = table.Column<string>(nullable: true)
+                    TeacherId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

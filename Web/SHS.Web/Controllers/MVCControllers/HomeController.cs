@@ -21,11 +21,10 @@ namespace SHS.Web.MVCControllers.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationIdentityUser user = await _userManager.GetUserAsync(HttpContext.User);
-            user = null;
             HomeViewModel model = new HomeViewModel
             {
-                UserAvatarUrl = user?.UserFaceImgUrl,
-                NickName=user?.NickName
+                UserAvatarUrl = user?.Teacher?.UserFaceImgUrl,
+                NickName=user?.Teacher?.NickName
             };
             return View(model);
         }

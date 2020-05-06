@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SHS.Core;
 using SHS.Dtos;
 using SHS.Entities;
@@ -20,15 +20,21 @@ namespace SHS.Web.APIControllers.Controllers
         private readonly SignInManager<ApplicationIdentityUser> _signInManager;
         private readonly RoleManager<ApplicationIdentityRole> _roleManager;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly IMapper _mapper;
+        private readonly ICourseRepository _courseRepository;
         public AccountController(UserManager<ApplicationIdentityUser> userManager
             , SignInManager<ApplicationIdentityUser> signInManager
             , RoleManager<ApplicationIdentityRole> roleManager
-            , ITeacherRepository teacherRepository)
+            , ITeacherRepository teacherRepository
+            , IMapper mapper
+            , ICourseRepository courseRepository)
         {
-            _userManager = userManager ?? throw new NullReferenceException(nameof(userManager) + "注入失败");
-            _signInManager = signInManager ?? throw new NullReferenceException(nameof(signInManager) + "注入失败");
-            _roleManager = roleManager ?? throw new NullReferenceException(nameof(roleManager) + "注入失败");
-            _teacherRepository = teacherRepository ?? throw new NullReferenceException(nameof(teacherRepository) + "注入失败");
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+            _teacherRepository = teacherRepository ?? throw new ArgumentNullException(nameof(teacherRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _courseRepository = courseRepository ?? throw new ArgumentNullException(nameof(courseRepository));
         }
         [HttpPost]
         [Route("LoginApi")]
@@ -92,7 +98,7 @@ namespace SHS.Web.APIControllers.Controllers
                 Email = userDto.Email,
                 Teacher = new Teacher
                 {
-                    TeacherId = teacherId
+                    TeacherId = teacherId,
                 }
             };
             var result = await _userManager.CreateAsync(user, userDto.Password);
@@ -107,6 +113,53 @@ namespace SHS.Web.APIControllers.Controllers
         public async Task LogOutApi()
         {
             await _signInManager.SignOutAsync();
+        }
+        [HttpGet]
+        [Route("UserInfo/{userId}")]
+        public async Task<ActionResult<UserInfoDto>> UserInfo(string userId)
+        {
+            ApplicationIdentityUser user = null;
+            if (userId.ToLower() == "current")
+            {
+                user = await _userManager.GetUserAsync(HttpContext.User);
+            }
+            else
+            {
+                user = await _userManager.FindByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+            }
+            user = _userManager.Users.Where(x => x.Id == user.Id).Include(x => x.Teacher).AsEnumerable().FirstOrDefault();
+            var teacher = user.Teacher;
+            var Course = _courseRepository.LoadEntities(x => x.CourseId == teacher.CourseId).FirstOrDefault();
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (user != null && teacher != null)
+            {
+                UserInfoDto dto = new UserInfoDto
+                {
+                    UsersId = user.Id,
+                    UserName = user.UserName,
+                    TeacherId = teacher.TeacherId,
+                    RealName = teacher.TeacherName,
+                    Area = teacher.Area,
+                    BirthDate = teacher.Birthday,
+                    City = teacher.City,
+                    CourseName = Course?.CourseName,
+                    NickName = teacher.NickName,
+                    EnglishName = teacher.EnglishName,
+                    PhoneNumber = teacher.PhoneNumber,
+                    Province = teacher.Province,
+                    UserDesc = teacher.UserDescription,
+                    UserEmail = teacher.UserEmail,
+                    UserFaceImgUrl = teacher.UserFaceImgUrl,
+                    UserGrades = userRoles,
+                    UserSex = teacher.Sex
+                };
+                return dto;
+            }
+            return NotFound();
         }
     }
 }
