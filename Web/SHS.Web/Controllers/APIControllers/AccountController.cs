@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -114,6 +115,7 @@ namespace SHS.Web.APIControllers.Controllers
         {
             await _signInManager.SignOutAsync();
         }
+        [Authorize]
         [HttpGet]
         [Route("UserInfo/{userId}")]
         public async Task<ActionResult<UserInfoDto>> UserInfo(string userId)
@@ -161,5 +163,23 @@ namespace SHS.Web.APIControllers.Controllers
             }
             return NotFound();
         }
+        [HttpPut]
+        [Route("UserInfo/{teacherId}")]
+        public async Task<ActionResult<ResultData>> UserInfo(string teacherId, [FromBody]UserInfoUpdateDto userDto)
+        {
+            var teacher = _teacherRepository.LoadEntities(x => x.TeacherId.ToString() == teacherId).FirstOrDefault();
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            teacher = _mapper.Map<Teacher>(userDto);
+            var result =await _teacherRepository.EditEntityAsync(teacher);
+            if (result)
+            {
+                return NoContent();
+            }
+            return new ResultData(ReturnCode.Error, -1, "信息更新错误", null);
+        }
+
     }
 }

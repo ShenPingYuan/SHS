@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SHS.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,13 @@ namespace SHS.IRepository
     public interface IBaseRepository<T> where T : class, new()
     {
         IEnumerable<T> LoadEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression);
+        IQueryable<T> LoadEntitiesAsIQueryable(System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression);
+
         IEnumerable<T> GetAllEntities();
         IEnumerable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount,
+            System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression,
+            System.Linq.Expressions.Expression<Func<T, S>> orderByLambdaExpression, bool isAsc);
+        IQueryable<T> LoadPageEntitiesAsIQueryable<S>(int pageIndex, int pageSize, out int totalCount,
             System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression,
             System.Linq.Expressions.Expression<Func<T, S>> orderByLambdaExpression, bool isAsc);
         bool DeleteEntity(T entity);

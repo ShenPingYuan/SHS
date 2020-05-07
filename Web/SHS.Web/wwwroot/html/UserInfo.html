@@ -26,43 +26,43 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">昵称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="nickName" value="@Model.NickName" class="layui-input">
+                    <input type="text" name="nickName" value="" class="layui-input" placeholder="请输入昵称">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">账号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="userName" value="@Model.UserName" disabled class="layui-input layui-disabled">
+                    <input type="text" name="userName" value="" disabled class="layui-input layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">教职工号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="teacherId" value="@Model.TeacherId" class="layui-input">
+                    <input type="text" name="teacherId" value="" disabled class="layui-input layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">职位</label>
                 <div class="layui-input-block">
-                    <input type="text" value="@Model.UserGrade" disabled class="layui-input layui-disabled">
+                    <input type="text" name="positions" value="" disabled class="layui-input layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">真实姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="realName" value="@Model.RealName" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
+                    <input type="text" name="realName" value="" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">英文名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="englishName" value="@Model.EnglishName" placeholder="Please Input English Name" lay-verify="required" class="layui-input englishName">
+                    <input type="text" name="englishName" value="" placeholder="Please Input English Name" lay-verify="required" class="layui-input englishName">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">授课</label>
                 <div class="layui-input-block">
-                    <input type="text" name="courseName" value="@Model.CourseName" placeholder="教授的课程" disabled lay-verify="" class="layui-input courseName layui-disabled">
+                    <input type="text" name="courseName" value="" placeholder="教授的课程" disabled lay-verify="" class="layui-input courseName layui-disabled">
                 </div>
             </div>
             <div class="layui-form-item" pane="">
@@ -71,19 +71,19 @@
                     <input type="radio" name="sex" value="男" title="男">
                     <input type="radio" name="sex" value="女" title="女">
                     <input type="radio" name="sex" value="保密" title="保密">
-                    <input type="hidden" name="userSex" class="hidden" value="@Model.UserSex" />
+                    <input type="hidden" name="userSex" class="hidden" value="" />
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">手机号码</label>
                 <div class="layui-input-block">
-                    <input type="tel" name="phoneNumber" value="@Model.PhoneNumber" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
+                    <input type="tel" name="phoneNumber" value="" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">出生年月</label>
                 <div class="layui-input-block">
-                    <input type="text" name="birthDate" value="@Model.BirthDate" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
+                    <input type="text" name="birthDate" value="" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
                 </div>
             </div>
             <div class="layui-form-item userAddress">
@@ -107,13 +107,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="email" value="@Model.UserEmail" placeholder="请输入邮箱" lay-verify="email" class="layui-input userEmail">
+                    <input type="text" name="email" value="" placeholder="请输入邮箱" lay-verify="email" class="layui-input userEmail">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">我的简介</label>
                 <div class="layui-input-block">
-                    <textarea name="userDescription" placeholder="请输入内容" class="layui-textarea myself">@Model.UserDesc</textarea>
+                    <textarea name="userDescription" placeholder="请输入内容" class="layui-textarea myself"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -140,13 +140,6 @@
     <script>
         layui.use(['form', 'code'], function () {
             form = layui.form;
-
-            layui.code();
-
-            $('.userAddress').xcity();
-
-            $('#end').xcity('广东', '广州市', '东山区');
-
         });
     </script>
 </body>

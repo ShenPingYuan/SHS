@@ -10,7 +10,23 @@ layui.use(['form','layer','upload','laydate'],function(){
         url: "/api/Account/userinfo/current",
         method: "GET",
         success: function (res) {
-            alert("收到数据");
+            var userGrades = "";
+            $("input[name='nickName']").val(res.nickName);
+            $("input[name='userName']").val(res.userName);
+            $("input[name='teacherId']").val(res.teacherId);
+            $("input[name='realName']").val(res.realName);
+            $("input[name='englishName']").val(res.englishName);
+            $("input[name='courseName']").val(res.courseName);
+            $("input[name='sex']").val(res.userSex);
+            $("input[name='phoneNumber']").val(res.phoneNumber);
+            $("input[name='birthDate']").val(res.birthDate);
+            $('.userAddress').xcity(res.province, res.city, res.area);
+            $("input[name='email']").val(res.userEmail);
+            $("textarea[name='userDescription']").val(res.userDesc);
+            for (var i = 0; i < res.userGrades.length; i++) {
+                userGrades += res.userGrades[i];
+            }
+            $("input[name='positions']").val(res.birthDate);
         },
         error: function (res) {
             

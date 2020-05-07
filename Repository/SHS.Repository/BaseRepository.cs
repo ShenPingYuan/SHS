@@ -45,11 +45,32 @@ namespace SHS.Repository
         {
             return _dbContext.Set<T>().Where(whereLambdaExpression);
         }
+        public IQueryable<T> LoadEntitiesAsIQueryable(Expression<Func<T, bool>> whereLambdaExpression)
+        {
+            return _dbContext.Set<T>().Where(whereLambdaExpression);
+        }
         public IEnumerable<T> GetAllEntities()
         {
             return _dbContext.Set<T>();
         }
         public IEnumerable<T> LoadPageEntities<S>(int pageIndex,
+            int pageSize, out int totalCount,
+            Expression<Func<T, bool>> whereLambdaExpression,
+            Expression<Func<T, S>> orderByLambdaExpression, bool isAsc)
+        {
+            var tem = _dbContext.Set<T>().Where(whereLambdaExpression);
+            totalCount = tem.Count();
+            if (isAsc)
+            {
+                tem = tem.OrderBy(orderByLambdaExpression).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                tem = tem.OrderByDescending(orderByLambdaExpression).Skip(pageIndex).Take(pageSize);
+            }
+            return tem;
+        }
+        public IQueryable<T> LoadPageEntitiesAsIQueryable<S>(int pageIndex,
             int pageSize, out int totalCount,
             Expression<Func<T, bool>> whereLambdaExpression,
             Expression<Func<T, S>> orderByLambdaExpression, bool isAsc)
@@ -90,6 +111,6 @@ namespace SHS.Repository
             });
             return await _dbContext.SaveChangesAsync() > 0;
         }
-        public async Task<int> GetCountAsync(T entity)=>await _dbContext.Set<T>().CountAsync<T>();
+        public async Task<int> GetCountAsync(T entity) => await _dbContext.Set<T>().CountAsync<T>();
     }
 }

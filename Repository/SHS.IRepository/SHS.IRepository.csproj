@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\SHS.Core\SHS.Core.csproj" />
     <ProjectReference Include="..\..\Model\SHS.Entities\SHS.Entities.csproj" />
   </ItemGroup>
 
