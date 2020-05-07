@@ -164,10 +164,13 @@ namespace SHS.Web.APIControllers.Controllers
             return NotFound();
         }
         [HttpPut]
+        [Authorize]
         [Route("UserInfo/{teacherId}")]
         public async Task<ActionResult<ResultData>> UserInfo(string teacherId, [FromBody]UserInfoUpdateDto userDto)
         {
-            var teacher = _teacherRepository.LoadEntities(x => x.TeacherId.ToString() == teacherId).FirstOrDefault();
+            Teacher teacher = _teacherRepository
+                .LoadEntitiesAsIQueryable(x => x.TeacherId.ToString() == teacherId)
+                .AsNoTracking().AsEnumerable().FirstOrDefault();
             if (teacher == null)
             {
                 return NotFound();

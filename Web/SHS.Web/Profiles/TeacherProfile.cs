@@ -12,8 +12,9 @@ namespace SHS.Web.Profiles
     {
         public TeacherProfile()
         {
-            CreateMap<UserInfoDto, Teacher>().ForMember(d => d.Sex, o => o.MapFrom(x => x.UserSex))
-                .ForMember(d=>d.UserDescription,o=>o.MapFrom(x=>x.UserDesc))
+            CreateMap<UserInfoUpdateDto, Teacher>()
+            .ForMember(d => d.Sex, o => o.MapFrom(x => x.UserSex))
+                .ForMember(d => d.UserDescription, o => o.MapFrom(x => x.UserDesc))
                 .ForMember(d => d.TeacherName, o => o.MapFrom(x => x.RealName))
                 .ForMember(d => d.Birthday, o => o.MapFrom(x => x.BirthDate));
         }
