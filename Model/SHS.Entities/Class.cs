@@ -23,7 +23,7 @@ namespace SHS.Entities
         /// <summary>
         /// 辅导员教职工号
         /// </summary>
-        public int InstructorId { get; set; }
+        public int? InstructorId { get; set; }
         /// <summary>
         /// 辅导员名字
         /// </summary>

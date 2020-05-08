@@ -5,7 +5,6 @@ layui.use(['form', 'layer', 'upload', 'laydate'], function () {
     var layer = parent.layer === undefined ? layui.layer : top.layer,
         upload = layui.upload,
         laydate = layui.laydate;
-
     $.ajax({
         url: "/api/Account/userinfo/current",
         method: "GET",
@@ -22,7 +21,6 @@ layui.use(['form', 'layer', 'upload', 'laydate'], function () {
             } else {
                 $("input[type='radio'][name='sex'][value=" + res.userSex + "]").prop("checked", true);
             }
-            //$("input[name='sex']").val(res.userSex);
             $("input[name='phoneNumber']").val(res.phoneNumber);
             $("input[name='birthDate']").val(res.birthDate);
             $('.userAddress').xcity(res.province, res.city, res.area);
@@ -32,12 +30,15 @@ layui.use(['form', 'layer', 'upload', 'laydate'], function () {
                 userGrades += res.userGrades[i];
             }
             $("input[name='positions']").val(res.birthDate);
+            form.render();
         },
         error: function (res) {
 
         }
 
     });
+
+    //$('#userAddress').xcity();
 
     upload.render({
         elem: '.userFaceBtn',

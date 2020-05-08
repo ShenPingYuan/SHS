@@ -170,7 +170,7 @@ namespace SHS.Data
                 entity.ToTable("tb_teacher");
 
                 entity.Property(e => e.TeacherId)
-                    .HasColumnName("teachenrId");
+                    .HasColumnName("teacherId");
 
                 entity.Property(e => e.Birthday)
                     .HasColumnName("birthday");

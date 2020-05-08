@@ -10,7 +10,7 @@ using SHS.Data;
 namespace SHS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200506154011_init")]
+    [Migration("20200508060755_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -389,9 +389,6 @@ namespace SHS.Data.Migrations
                     b.Property<double>("Score")
                         .HasColumnType("float");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
                     b.HasKey("StudentId", "CourseId");
 
                     b.HasIndex("CourseId");
@@ -402,7 +399,7 @@ namespace SHS.Data.Migrations
             modelBuilder.Entity("SHS.Entities.Teacher", b =>
                 {
                     b.Property<int>("TeacherId")
-                        .HasColumnName("teachenrId")
+                        .HasColumnName("teacherId")
                         .HasColumnType("int");
 
                     b.Property<string>("Area")

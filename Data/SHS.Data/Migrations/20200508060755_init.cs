@@ -99,7 +99,7 @@ namespace SHS.Data.Migrations
                 name: "tb_teacher",
                 columns: table => new
                 {
-                    teachenrId = table.Column<int>(nullable: false),
+                    teacherId = table.Column<int>(nullable: false),
                     teacherName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
                     NickName = table.Column<string>(nullable: true),
                     englishName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
@@ -117,7 +117,7 @@ namespace SHS.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_teacher", x => x.teachenrId);
+                    table.PrimaryKey("PK_tb_teacher", x => x.teacherId);
                     table.ForeignKey(
                         name: "FK_tb_teacher_tb_college_ColleageId",
                         column: x => x.ColleageId,
@@ -189,7 +189,7 @@ namespace SHS.Data.Migrations
                         name: "FK_IdentityUser_tb_teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "tb_teacher",
-                        principalColumn: "teachenrId",
+                        principalColumn: "teacherId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -199,8 +199,7 @@ namespace SHS.Data.Migrations
                 {
                     studentId = table.Column<int>(nullable: false),
                     courseId = table.Column<int>(nullable: false),
-                    Score = table.Column<double>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false)
+                    Score = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -31,7 +31,7 @@ namespace SHS.Entities
         /// <summary>
         /// 院长教师公号
         /// </summary>
-        public int DeanId { get; set; }
+        public int? DeanId { get; set; }
         /// <summary>
         /// 院长名字
         /// </summary>
