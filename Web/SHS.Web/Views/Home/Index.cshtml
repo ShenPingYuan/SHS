@@ -38,11 +38,11 @@
         <div class="left_open">
             <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
         </div>
-        <ul class="layui-nav left fast-add" lay-filter="">
+        @*<ul class="layui-nav left fast-add" lay-filter="">
             <li class="layui-nav-item">
                 <a href="javascript:;">+新增</a>
                 <dl class="layui-nav-child">
-                    <!-- 二级菜单 -->
+                    
                     <dd>
                         <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
                             <i class="iconfont">&#xe6a2;</i>弹出最大化
@@ -70,7 +70,7 @@
                     </dd>
                 </dl>
             </li>
-        </ul>
+        </ul>*@
         @if (SignInManager.IsSignedIn(User))
         {
 
@@ -125,33 +125,27 @@
             <ul id="nav">
                 <li>
                     <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
-                        <cite>会员管理</cite>
+                        <i class="iconfont left-nav-li" lay-tips="用户管理">&#xe6b8;</i>
+                        <cite>用户管理</cite>
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('统计页面','/html/welcome1.html')">
+                            <a onclick="xadmin.add_tab('用户列表', '/html/welcome1.html', true)">
                                 <i class="iconfont">&#xe6a7;</i>
-                                <cite>统计页面</cite>
+                                <cite>用户列表</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('会员列表(静态表格)','/html/member-list.html')">
+                            <a onclick="xadmin.add_tab('搜索用户','/html/welcome1.html',true)">
                                 <i class="iconfont">&#xe6a7;</i>
-                                <cite>会员列表(静态表格)</cite>
+                                <cite>搜索用户</cite>
                             </a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('会员列表(动态表格)','/html/member-list1.html',true)">
+                            <a onclick="xadmin.add_tab('职位列表', '/html/member-list.html', true)">
                                 <i class="iconfont">&#xe6a7;</i>
-                                <cite>会员列表(动态表格)</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('会员删除','/html/member-del.html')">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>会员删除</cite>
+                                <cite>职位列表</cite>
                             </a>
                         </li>
                         <li>
@@ -179,8 +173,8 @@
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
-                        <cite>订单管理</cite>
+                        <i class="iconfont left-nav-li" lay-tips="新生管理">&#xe723;</i>
+                        <cite>新生管理</cite>
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
