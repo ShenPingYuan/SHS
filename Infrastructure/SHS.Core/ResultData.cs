@@ -5,17 +5,15 @@ namespace SHS.Core
 {
     public class ResultData
     {
-        public ResultData(ReturnCode code, int count, string msg, IEnumerable<object> data)
+        public ResultData(ReturnCode code, int count, string msg, IEnumerable<object> datas)
         {
-            Data = new List<object>();
+            Datas = datas;
             Code = code;
             Count = count;
             Msg = msg;
-            Data = data;
         }
         public ResultData(ReturnCode code, int count, string msg, object data)
         {
-            Datas = new List<object>();
             Code = code;
             Count = count;
             Msg = msg;

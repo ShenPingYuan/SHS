@@ -53,6 +53,10 @@ namespace SHS.Repository
         {
             return _dbContext.Set<T>();
         }
+        public IQueryable<T> GetAllEntitiesAsIQueryable()
+        {
+            return _dbContext.Set<T>();
+        }
         public IEnumerable<T> LoadPageEntities<S>(int pageIndex,
             int pageSize, out int totalCount,
             Expression<Func<T, bool>> whereLambdaExpression,

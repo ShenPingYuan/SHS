@@ -17,6 +17,7 @@ namespace SHS.IRepository
         IQueryable<T> LoadEntitiesAsIQueryable(System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression);
 
         IEnumerable<T> GetAllEntities();
+        IQueryable<T> GetAllEntitiesAsIQueryable();
         IEnumerable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount,
             System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression,
             System.Linq.Expressions.Expression<Func<T, S>> orderByLambdaExpression, bool isAsc);
