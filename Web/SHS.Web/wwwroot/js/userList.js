@@ -119,21 +119,30 @@ function member_del(obj, id) {
     });
 }
 
-
-
 function delAll(argument) {
-    var ids = [];
-
-    // 获取选中的id
-    $('tbody input').each(function (index, el) {
-        if ($(this).prop('checked')) {
-            ids.push($(this).val())
+    var checkStatus = layui.table.checkStatus('test');
+    var datas = checkStatus.data;
+    var teacherIds = [];
+    if (datas.length > 0) {
+        for (var i in datas) {
+            teacherIds.push(parseInt(datas[i].teacherId));
         }
-    });
-
-    layer.confirm('确认要删除吗？' + ids.toString(), function (index) {
-        //捉到所有被选中的，发异步进行删除
-        layer.msg('删除成功', { icon: 1 });
-        $(".layui-form-checked").not('.header').parents('tr').remove();
-    });
+        layer.confirm('确认要删除选中用户吗？', { icon: 3, title: '提示信息' }, function (index) {
+            $.ajax({
+                url: "/api/teachers/",
+                type: "Delete",
+                data: JSON.stringify({
+                    teacherIds,
+                }),
+                contentType: "application/json;",
+                dataType:"json",
+                success: function (res) {
+                    layer.msg("删除成功");
+                },
+                error: function (res) {
+                    layer.msg("删除失败");
+                },
+            });
+        });
+    }
 }

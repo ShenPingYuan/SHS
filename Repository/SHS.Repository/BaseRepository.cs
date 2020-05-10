@@ -116,5 +116,15 @@ namespace SHS.Repository
             return await _dbContext.SaveChangesAsync() > 0;
         }
         public async Task<int> GetCountAsync(T entity) => await _dbContext.Set<T>().CountAsync<T>();
+        public bool DeleteEntities(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            return _dbContext.SaveChanges() > 0;
+        }
+        public async Task<bool> DeleteEntitiesAsync(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
     }
 }

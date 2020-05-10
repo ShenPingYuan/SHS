@@ -7,7 +7,7 @@ namespace SHS.Core
     {
         public ResultData(ReturnCode code, int count, string msg, IEnumerable<object> datas)
         {
-            Datas = datas;
+            Data = datas;
             Code = code;
             Count = count;
             Msg = msg;
@@ -19,7 +19,6 @@ namespace SHS.Core
             Msg = msg;
             Data = data;
         }
-        public object Data { get; set; }
         /// <summary>
         /// 返回码
         /// </summary>
@@ -33,8 +32,8 @@ namespace SHS.Core
         /// </summary>
         public string Msg { get; set; }
         /// <summary>
-        /// 返回的实际数据
+        /// 返回的数据
         /// </summary>
-        public IEnumerable<object> Datas { get; set; }
+        public object Data { get; set; }
     }
 }

@@ -25,10 +25,12 @@ namespace SHS.IRepository
             System.Linq.Expressions.Expression<Func<T, bool>> whereLambdaExpression,
             System.Linq.Expressions.Expression<Func<T, S>> orderByLambdaExpression, bool isAsc);
         bool DeleteEntity(T entity);
+        bool DeleteEntities(IEnumerable<T> entities);
         bool EditEntity(T entity);
         T AddEntity(T entity);
         //以下接口为上面接口的异步接口
         Task<bool> DeleteEntityAsync(T entity);
+        Task<bool> DeleteEntitiesAsync(IEnumerable<T> entities);
         Task<bool> EditEntityAsync(T entity);
         Task<T> AddEntityAsync(T entity);
         Task<int> GetCountAsync(T entity);

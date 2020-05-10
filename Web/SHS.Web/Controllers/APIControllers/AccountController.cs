@@ -183,6 +183,5 @@ namespace SHS.Web.APIControllers.Controllers
             }
             return new ResultData(ReturnCode.Error, -1, "信息更新错误", null);
         }
-
     }
 }
