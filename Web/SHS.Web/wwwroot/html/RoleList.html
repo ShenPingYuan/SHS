@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/userList.js"></script>
+    <script src="/js/roleList.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -39,18 +39,12 @@
                         <button class="layui-btn" onclick="xadmin.open('添加职位','/html/RoleAdd.html',600,400)"><i class="layui-icon"></i>添加</button>
                     </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/teachers',page:true,limits:[10,20,30,50,100],limit:30,toolbar: '#toolbarDemo',id:'users'}" lay-filter="users">
+                        <table class="layui-table" lay-data="{url:'/api/roles',page:true,limits:[10,20],limit:10,id:'roles'}" lay-filter="roles">
                             <thead>
                                 <tr>
                                     <th lay-data="{type:'checkbox'}">ID</th>
-                                    <th lay-data="{field:'teacherId',  sort: true}">教职工号</th>
-                                    <th lay-data="{field:'realName',  sort: true, edit: 'text'}">名字</th>
-                                    <th lay-data="{field:'age',  sort: true, edit: 'text'}">年龄</th>
-                                    <th lay-data="{field:'userEmail', edit: 'text'}">邮箱</th>
-                                    <th lay-data="{field:'sex', width:80,templet: '#switchTpl'}">性别</th>
-                                    <th lay-data="{field:'courseName', edit: 'text'}">授课</th>
-                                    <th lay-data="{field:'userDescription', edit: 'text'}">描述</th>
-                                    <th lay-data="{templet: '#tb_status'}">用户状态</th>
+                                    <th lay-data="{field:'positionGrade',  sort: true}">职位等级</th>
+                                    <th lay-data="{field:'roleName'}">角色名</th>
                                     <th lay-data="{templet: '#toolbarEdit'}">操作</th>
                                 </tr>
                             </thead>
@@ -60,29 +54,9 @@
             </div>
         </div>
     </div>
-    <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData"> 获取选中行数据 </button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll"> 验证是否全选</button>
-        </div>
-    </script>
-    <script type="text/html" id="switchTpl">
-        <!-- 这里的checked的状态只是演示 -->
-        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked': ''}}>
-    </script>
-    <script type="text/html" id="tb_status">
-        <span class="layui-btn layui-btn-normal layui-btn-mini tb_status">已启用</span>
-    </script>
     <script type="text/html" id="toolbarEdit">
-        <a href="javascript:;" lay-event="changeStatus" title="启用">
-            <i class="layui-icon">&#xe601;</i>
-        </a>
-        <a title="编辑" onclick="xadmin.open('编辑','/html/UpdateTeacher.html')" href="javascript:;">
-            <i class="layui-icon">&#xe642;</i>
-        </a>
-        <a title="删除" lay-event="delete" href="javascript:;">
-            <i class="layui-icon">&#xe640;</i>
+        <a title="删除职位" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" href="javascript:;">
+            删除职位
         </a>
     </script>
 </body>
