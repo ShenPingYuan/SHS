@@ -14,7 +14,8 @@ namespace SHS.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Position = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,7 @@ namespace SHS.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     collegeName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     englishName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    DeanId = table.Column<int>(nullable: false),
+                    DeanId = table.Column<int>(nullable: true),
                     DeanName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -80,7 +81,7 @@ namespace SHS.Data.Migrations
                     classId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     className = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    InstructorId = table.Column<int>(nullable: false),
+                    InstructorId = table.Column<int>(nullable: true),
                     InstructorName = table.Column<string>(nullable: true),
                     CollegeId = table.Column<int>(nullable: false)
                 },
@@ -199,7 +200,7 @@ namespace SHS.Data.Migrations
                 {
                     studentId = table.Column<int>(nullable: false),
                     courseId = table.Column<int>(nullable: false),
-                    Score = table.Column<double>(nullable: false)
+                    Score = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {

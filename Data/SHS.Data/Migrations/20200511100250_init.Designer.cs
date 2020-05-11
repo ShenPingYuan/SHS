@@ -10,7 +10,7 @@ using SHS.Data;
 namespace SHS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200508060755_init")]
+    [Migration("20200511100250_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,6 +142,9 @@ namespace SHS.Data.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<int?>("Position")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
@@ -240,7 +243,7 @@ namespace SHS.Data.Migrations
                     b.Property<int>("CollegeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int?>("InstructorId")
                         .HasColumnType("int");
 
                     b.Property<string>("InstructorName")
@@ -266,7 +269,7 @@ namespace SHS.Data.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
-                    b.Property<int>("DeanId")
+                    b.Property<int?>("DeanId")
                         .HasColumnType("int");
 
                     b.Property<string>("DeanName")
@@ -386,7 +389,7 @@ namespace SHS.Data.Migrations
                         .HasColumnName("courseId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Score")
+                    b.Property<double?>("Score")
                         .HasColumnType("float");
 
                     b.HasKey("StudentId", "CourseId");

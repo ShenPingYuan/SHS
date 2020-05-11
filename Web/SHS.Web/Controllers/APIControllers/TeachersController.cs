@@ -147,7 +147,7 @@ namespace SHS.Web.Controllers.APIControllers
                 return NotFound();
             }
             var result=await _teacherRepository.DeleteEntityAsync(teacher);
-            return Ok();
+            return NoContent();
         }
         [HttpDelete]
         public async Task<ActionResult> DeleteList([FromForm]List<int> teacherIds)
@@ -159,6 +159,16 @@ namespace SHS.Web.Controllers.APIControllers
                 .ToListAsync();
             await _teacherRepository.DeleteEntitiesAsync(teachers);
             return Ok();
+        }
+        [HttpGet("checkuser/{username}")]
+        public async Task<ActionResult<bool>> CheckUser(string username)
+        {
+            var user =await _userManager.FindByNameAsync(username);
+            if (user != null)
+            {
+                return false ;
+            }
+            return true;
         }
     }
 }
