@@ -112,32 +112,45 @@ function member_stop(obj, id) {
 
 /*用户-删除*/
 function member_del(obj, id) {
+    var selectedteacherId = layui.table.checkStatus('users').data.teacherId
+    if (selectedteacherId == "") {
+        layer.confirm('无法删除管理员！');
+        return;
+    }
     layer.confirm('确认要删除吗？', function (index) {
         //发异步删除数据
         $(obj).parents("tr").remove();
+        $.ajax({
+            url: "",
+            data: {
+
+            }
+        })
         layer.msg('已删除!', { icon: 1, time: 1000 });
     });
 }
 
 function delAll(argument) {
-    var checkStatus = layui.table.checkStatus('test');
+    var checkStatus = layui.table.checkStatus('users');
     var datas = checkStatus.data;
-    var teacherIds = [];
+    TeacherIds = [];
     if (datas.length > 0) {
         for (var i in datas) {
-            teacherIds.push(parseInt(datas[i].teacherId));
+            if (datas[i].teacherId == "") {
+
+            }
+            TeacherIds.push(parseInt(datas[i].teacherId));
         }
         layer.confirm('确认要删除选中用户吗？', { icon: 3, title: '提示信息' }, function (index) {
             $.ajax({
                 url: "/api/teachers/",
                 type: "Delete",
-                data: JSON.stringify({
-                    teacherIds,
-                }),
-                contentType: "application/json;",
-                dataType:"json",
+                data: {
+                    TeacherIds: TeacherIds
+                },
                 success: function (res) {
                     layer.msg("删除成功");
+                    $(".layui-form-checked").not('.header').parents('tr').remove();
                 },
                 error: function (res) {
                     layer.msg("删除失败");

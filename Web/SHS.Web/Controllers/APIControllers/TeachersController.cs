@@ -150,8 +150,10 @@ namespace SHS.Web.Controllers.APIControllers
             return Ok();
         }
         [HttpDelete]
-        public async Task<ActionResult> DeleteList(List<int> teacherIds)
+        public async Task<ActionResult> DeleteList([FromForm]List<int> teacherIds)
         {
+            var Administrator = _userManager.Users.FirstOrDefault(x=>x.UserName=="2439739932");
+            teacherIds.Remove(Administrator.TeacherId);
             var teachers = await _teacherRepository
                 .LoadEntitiesAsIQueryable(x => teacherIds.Contains(x.TeacherId))
                 .ToListAsync();
