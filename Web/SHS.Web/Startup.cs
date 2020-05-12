@@ -71,6 +71,9 @@ namespace SHS.Web
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICollegeRepository, CollegeRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IClassRepository, ClassRepository>();
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings

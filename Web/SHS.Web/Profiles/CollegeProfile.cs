@@ -13,7 +13,7 @@ namespace SHS.Web.Profiles
         public CollegeProfile()
         {
             CreateMap<College, CollegeDto>().ForMember(d => d.TeacherId, o => o.MapFrom(x => x.DeanId));
-            CreateMap<CollegeDto, College>().ForMember(d => d.DeanId, o => o.MapFrom(x => x.TeacherId)); ;
+            CreateMap<CollegeDto, College>().ForMember(d => d.DeanId, o => o.MapFrom(x => x.TeacherId)); 
         }
     }
 }

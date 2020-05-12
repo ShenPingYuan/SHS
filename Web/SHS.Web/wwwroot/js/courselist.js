@@ -2,21 +2,22 @@
     var table = layui.table;
     var $ = layui.jquery;
     var layer = layui.layer;
-    table.on('tool(colleges)',
+    var api = "/api/courses/";
+    table.on('tool(courses)',
         function (obj) {
             var event = obj.event;
             var data = obj.data;
             if (event === 'delete') {
-                DeleteRow(data.collegeId);
+                DeleteRow(data.courseId);
             } else if (event === "edit") {
-                EditRow(data.collegeId);
+                EditRow(data.courseId);
             }
         });
     function DeleteRow(para) {
         //删除学院
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
         $.ajax({
-            url: "/api/colleges/" + para,
+            url: api + para,
             type: "delete",
             success: function (res) {
                 top.layer.close(index);
@@ -38,6 +39,6 @@
     }
     function EditRow(para) {
         //编辑学院信息
-        xadmin.open('编辑', '/html/UpdateCollege.html?collegeid=' + para);
+        xadmin.open('编辑', '/html/updatecourse.html?id=' + para);
     }
 });

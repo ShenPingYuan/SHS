@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/updatecollege.js"></script>
+    <script src="/js/updatecourse.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
         <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -23,29 +23,27 @@
         <div class="layui-row">
             <form class="layui-form layui-form-pane">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">学院ID</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="collegeid" required lay-verify="required" placeholder="请输入学院ID" autocomplete="off" class="layui-input layui-disabled" disabled>
-                    </div>
-                </div>
-                <div class="layui-form-item">
                     <label class="layui-form-label">学院名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="collegename" required lay-verify="required" placeholder="请输入学院名字" autocomplete="off" class="layui-input">
+                        <input type="text" name="coursename" required lay-verify="required" placeholder="请输入课程名字" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">EnglishName</label>
                     <div class="layui-input-block">
-                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入学院英文名" autocomplete="off" class="layui-input">
+                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入课程英文名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">更换院长</label>
+                    <label class="layui-form-label">课程学分</label>
                     <div class="layui-input-block">
-                        <select name="teacherid" lay-verify="" lay-search>
-                            <option value="">请选择院长</option>
-                        </select>
+                        <input type="text" name="coursescore" required lay-verify="required" placeholder="请输入课程学分" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否为必修课</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="iscompulsory" lay-skin="switch" lay-text="必修|选修">
                     </div>
                 </div>
                 <div class="layui-form-item">

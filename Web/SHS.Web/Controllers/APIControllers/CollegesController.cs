@@ -35,14 +35,18 @@ namespace SHS.Web.Controllers.APIControllers
         {
             var colleges = await _collegeRepository.GetAllEntitiesAsIQueryable().ToListAsync();
             var dtos = _mapper.Map<List<CollegeDto>>(colleges);
-            //for (int i = 0; i < dtos.Count(); i++)
-            //{
-            //    if (dtos[i].DeanId != null)
-            //    {
-            //        dtos[i].DeanName = (await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == dtos[i].DeanId).FirstOrDefaultAsync()).TeacherName;
-            //    }
-            //}
             return new ResultData(ReturnCode.Succeed, -1, "学院列表", dtos);
+        }
+        [HttpGet("{collegeId}")]
+        public async Task<ActionResult<CollegeDto>> GetCollege(int collegeId)
+        {
+            var college = await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == collegeId).FirstOrDefaultAsync();
+            if (college == null)
+            {
+                return NotFound();
+            }
+            var dto = _mapper.Map<CollegeDto>(college);
+            return dto;
         }
         [HttpPost]
         public async Task<ActionResult> CreateCollege([FromBody]CollegeDto dto)
@@ -79,11 +83,12 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 return BadRequest();
             }
-            var college =await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId).FirstOrDefaultAsync();
+            var college =await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId).AsNoTracking().FirstOrDefaultAsync();
             if (college == null)
             {
                 return BadRequest();
             }
+            college = _mapper.Map<College>(dto);
             await _collegeRepository.EditEntityAsync(college);
             return NoContent();
         }
