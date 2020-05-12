@@ -25,6 +25,7 @@ namespace SHS.Web.Profiles
 
             CreateMap<Teacher, TeacherDto>();
             CreateMap<TeacherDto, Teacher>();
+            CreateMap<Teacher, DeanTeacherDto>().ForMember(d=>d.DeanName,o=>o.MapFrom(x=>x.TeacherName));
         }
     }
 }

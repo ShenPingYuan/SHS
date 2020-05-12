@@ -47,15 +47,17 @@ namespace SHS.Web.Controllers.APIControllers
         [HttpPost]
         public async Task<ActionResult> CreateCollege([FromBody]CollegeDto dto)
         {
-            var college = await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId)
+            var college = await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId||x.CollegeName==dto.CollegeName)
                 .FirstOrDefaultAsync();
             if (college != null)
             {
                 return BadRequest();
             }
-            college = _mapper.Map<College>(college);
+            college = _mapper.Map<College>(dto);
+            var collegeId =Convert.ToInt32(DateTime.Now.ToString("yyyyHHss"));
+            college.CollegeId = collegeId;
             await _collegeRepository.AddEntityAsync(college);
-            return Ok();
+            return NoContent();
         }
         [HttpDelete("{collegeId}")]
         public async Task<IActionResult> Delete(int collegeId)

@@ -170,5 +170,12 @@ namespace SHS.Web.Controllers.APIControllers
             }
             return true;
         }
+        [HttpGet("Deans")]
+        public async Task<ActionResult<IEnumerable<DeanTeacherDto>>> GetDeans()
+        {
+            var teachers =await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
+            var deans = _mapper.Map<IEnumerable<DeanTeacherDto>>(teachers);
+            return Ok(deans);
+        }
     }
 }

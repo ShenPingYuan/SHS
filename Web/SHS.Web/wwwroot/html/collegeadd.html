@@ -29,6 +29,20 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">EnglishName</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入学院英文名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请添加院长</label>
+                    <div class="layui-input-block">
+                        <select name="teacherid" lay-verify="" lay-search>
+                            <option value="">请选择院长</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit lay-filter="add">添加</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
