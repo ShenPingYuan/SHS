@@ -26,8 +26,7 @@ namespace SHS.Data.Migrations
                 name: "tb_college",
                 columns: table => new
                 {
-                    CollegeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CollegeId = table.Column<int>(nullable: false),
                     collegeName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     englishName = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     DeanId = table.Column<int>(nullable: true),

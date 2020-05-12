@@ -10,7 +10,7 @@ using SHS.Data;
 namespace SHS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200511100250_init")]
+    [Migration("20200512034814_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,9 +259,7 @@ namespace SHS.Data.Migrations
             modelBuilder.Entity("SHS.Entities.College", b =>
                 {
                     b.Property<int>("CollegeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("CollegeName")
                         .HasColumnName("collegeName")

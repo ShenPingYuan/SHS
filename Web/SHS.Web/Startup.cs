@@ -70,6 +70,7 @@ namespace SHS.Web
             });
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICollegeRepository, CollegeRepository>();
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings

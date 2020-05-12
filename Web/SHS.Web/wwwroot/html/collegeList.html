@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>用户列表-SHS</title>
+    <title>学院列表-SHS</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -44,7 +44,7 @@
                                 <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                <input type="text" name="collegeName" placeholder="请输入学院名" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="layui-btn" lay-submit="" lay-filter="sreach">
@@ -55,21 +55,18 @@
                     </div>
                     <div class="layui-card-header">
                         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                        <button class="layui-btn" onclick="xadmin.open('添加用户','/html/UserAdd.html',600,400)"><i class="layui-icon"></i>添加</button>
+                        <button class="layui-btn" onclick="xadmin.open('添加学院','/html/CollegeAdd.html',600,400)"><i class="layui-icon"></i>添加</button>
                     </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/teachers',page:true,limits:[10,20,30,50,100],limit:30,toolbar: '#toolbarDemo',id:'users'}" lay-filter="users">
+                        <table class="layui-table" lay-data="{url:'/api/Colleges',page:true,limits:[10,20,30,50],limit:30,id:'colleges'}" lay-filter="colleges">
                             <thead>
                                 <tr>
                                     <th lay-data="{type:'checkbox'}">ID</th>
-                                    <th lay-data="{field:'teacherId',  sort: true}">教职工号</th>
-                                    <th lay-data="{field:'realName',  sort: true, edit: 'text'}">名字</th>
-                                    <th lay-data="{field:'age',  sort: true, edit: 'text'}">年龄</th>
-                                    <th lay-data="{field:'userEmail', edit: 'text'}">邮箱</th>
-                                    <th lay-data="{field:'sex', width:80,templet: '#switchTpl'}">性别</th>
-                                    <th lay-data="{field:'courseName', edit: 'text'}">授课</th>
-                                    <th lay-data="{field:'userDescription', edit: 'text'}">描述</th>
-                                    <th lay-data="{templet: '#tb_status'}">用户状态</th>
+                                    <th lay-data="{field:'collegeId',  sort: true}">学院ID</th>
+                                    <th lay-data="{field:'collegeName'}">学院名</th>
+                                    <th lay-data="{field:'englishName'}">英文名</th>
+                                    <th lay-data="{field:'dean'}">院长</th>
+                                    <th lay-data="{field:'description'}">描述</th>
                                     <th lay-data="{templet: '#toolbarEdit'}">操作</th>
                                 </tr>
                             </thead>
@@ -79,25 +76,8 @@
             </div>
         </div>
     </div>
-    <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData"> 获取选中行数据 </button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll"> 验证是否全选</button>
-        </div>
-    </script>
-    <script type="text/html" id="switchTpl">
-        <!-- 这里的checked的状态只是演示 -->
-        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked': ''}}>
-    </script>
-    <script type="text/html" id="tb_status">
-        <span class="layui-btn layui-btn-normal layui-btn-mini tb_status">已启用</span>
-    </script>
     <script type="text/html" id="toolbarEdit">
-        <a href="javascript:;" lay-event="changeStatus" title="启用">
-            <i class="layui-icon">&#xe601;</i>
-        </a>
-        <a title="编辑" onclick="xadmin.open('编辑','/html/UpdateTeacher.html')" href="javascript:;">
+        <a title="编辑" onclick="" lay-event="edit" href="javascript:;">
             <i class="layui-icon">&#xe642;</i>
         </a>
         <a title="删除" lay-event="delete" href="javascript:;">

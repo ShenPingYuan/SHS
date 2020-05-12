@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SHS.Entities
@@ -18,6 +19,7 @@ namespace SHS.Entities
         /// <summary>
         /// 学院编号
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public int CollegeId { get; set; }
         /// <summary>
