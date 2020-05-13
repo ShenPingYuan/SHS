@@ -7,16 +7,16 @@
             var event = obj.event;
             var data = obj.data;
             if (event === 'delete') {
-                DeleteRow(data.classid);
+                DeleteRow(data.classId);
             } else if (event === "edit") {
-                EditRow(data.classid);
+                EditRow(data.classId);
             }
         });
     function DeleteRow(para) {
         //删除学院
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
         $.ajax({
-            url: "/api/classid/" + para,
+            url: "/api/classes/" + para,
             type: "delete",
             success: function (res) {
                 top.layer.close(index);

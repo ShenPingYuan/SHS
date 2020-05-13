@@ -8,9 +8,9 @@
             var event = obj.event;
             var data = obj.data;
             if (event === 'delete') {
-                DeleteRow(data.studentid);
+                DeleteRow(data.studentId);
             } else if (event === "edit") {
-                EditRow(data.studentid);
+                EditRow(data.studentId);
             }
         });
     function DeleteRow(para) {

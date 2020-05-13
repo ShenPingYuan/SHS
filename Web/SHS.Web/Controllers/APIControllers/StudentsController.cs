@@ -82,12 +82,11 @@ namespace SHS.Web.Controllers.APIControllers
                 return BadRequest();
             }
             var classCount = college.Classes.Count();
-            var @class1 = _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId)
-                .Include(x => x.Students);
             var @class = await _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId)
                 .Include(x => x.Students).OrderBy(x => x.Students.Count()).FirstOrDefaultAsync();
-            if (@class == null || @class.Students.Count() > 50)
+            if (!(@class != null && @class.Students.Count() < 50))
             {
+                var test = dto.CollegeId.ToString().Substring(dto.CollegeId.ToString().Length - 2, 2) + (college.Classes.Count() + 1);
                 int classId = Convert.ToInt32(dto.CollegeId.ToString()
                     .Substring(dto.CollegeId.ToString().Length-2,2)+(college.Classes.Count()+1));
                 @class = new Class
@@ -119,6 +118,10 @@ namespace SHS.Web.Controllers.APIControllers
             var strstudentId = DateTime.Now.Year.ToString().Substring(2,2) + college.CollegeId.ToString()
                 .Substring(college.CollegeId.ToString().Length - 3) + lastTwoOfClass + lastTwoOfStudent;
             var studentId = Convert.ToInt32(strstudentId);
+            while((await _studentRepository.LoadEntitiesAsIQueryable(x => x.StudentId == studentId).FirstOrDefaultAsync())!=null)
+            {
+                studentId++;
+            }
             Student student = new Student
             {
                 StudentId = studentId,

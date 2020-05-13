@@ -9,9 +9,9 @@
             var event = obj.event;
             var data = obj.data;
             if (event === 'delete') {
-                DeleteRow(data.studentid);
+                DeleteRow(data.studentId);
             } else if (event === "edit") {
-                EditRow(data.studentid);
+                EditRow(data.studentId);
             }
         });
     function DeleteRow(para) {
@@ -77,8 +77,7 @@
                 layer.alert("添加成功", {
                     icon: 6,
                 }, function () {
-                    xadmin.close();
-                    xadmin.father_reload();
+                        location.reload();
                 });
             },
             error: function (res) {
