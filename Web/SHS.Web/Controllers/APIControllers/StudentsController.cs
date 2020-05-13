@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -158,6 +159,28 @@ namespace SHS.Web.Controllers.APIControllers
             }
             student = _mapper.Map<Student>(dto);
             await _studentRepository.EditEntityAsync(student);
+            return NoContent();
+        }
+        [HttpPost("one")]
+        public async Task<ActionResult> CreateAstudent([FromBody]StudentAddDto dto)
+        {
+            var @class =await _classRepository.LoadEntitiesAsIQueryable(x => x.ClassId == dto.ClassId).FirstOrDefaultAsync();
+            var college=await _collegeRepository.LoadEntitiesAsIQueryable(x=>x.CollegeId==dto.CollegeId).FirstOrDefaultAsync();
+            if (@class == null||college==null)
+            {
+                return NotFound();
+            }
+            int studentId = Convert.ToInt32(DateTime.Now.ToString("yyyyMMSS") + DateTime.Now.Day.ToString().Substring(DateTime.Now.Day.ToString().Length - 1));
+
+            Student student = new Student
+            {
+                StudentId = studentId,
+                StudentName = dto.StudentName,
+                Class = @class,
+                Password = studentId.ToString(),
+                Year = DateTime.Now.Year,
+            };
+            await _studentRepository.AddEntityAsync(student);
             return NoContent();
         }
     }

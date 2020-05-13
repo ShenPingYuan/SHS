@@ -1,4 +1,5 @@
-﻿layui.use(['table', 'form', 'jquery', 'layer'], function () {
+﻿layui.use(['table', 'form', 'jquery', 'layer','laydate'], function () {
+    var laydate = layui.laydate;
     var table = layui.table;
     var form = layui.form;
     var $ = layui.jquery;
@@ -25,6 +26,14 @@
                 $("input[name='studentname']").val(res.studentname);
                 $("input[name='englishname']").val(res.englishName);
                 $("input[name='password']").val(res.password);
+                $("input[name='birthday']").val(res.birthday);
+                $("input[name='age']").val(res.age);
+                $("input[name='email']").val(res.email);
+                $("input[name='province']").val(res.province);
+                $("input[name='userfaceimgurl']").val(res.userFaceImgUrl);
+                $("input[name='city']").val(res.city);
+                $("input[name='area']").val(res.area);
+                $("input[name='description']").val(res.description);
                 $("select[name='sex']>option[value='" + res.sex + "']").attr("selected", true);
                 $("select[name='classid']>option[value='" + res.classId + "']").attr("selected", true);
                 form.render();
@@ -63,8 +72,15 @@
                 "studentname": data.field.studentname,
                 "englishname": data.field.englishname,
                 "sex": data.field.sex,
-                "password": data.field.password,
                 "classid": parseInt(data.field.classid),
+                "description": data.field.description,
+                "birthday": data.field.birthday,
+                "province": data.field.province,
+                "city": data.field.city,
+                "area": data.field.area,
+                "password": data.field.password,
+                "email": data.field.email,
+                "userfaceimgurl": data.field.userfaceimgurl
             }),
             contentType: "application/json;",
             success: function (res) {
@@ -86,5 +102,8 @@
             }
         })
         return false;
+    });
+    laydate.render({
+        elem: '#birthday' //指定元素
     });
 });

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/updatestudent.js"></script>
+    <script type="text/javascript" src="/js/xcity.js"></script>
+    <script src="/js/updatestudentroll.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
         <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -47,6 +48,18 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input" autocomplete="off" placeholder="出生日期" name="birthday" id="birthday">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年龄</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="age" required lay-verify="required" placeholder="学生年龄" autocomplete="off" disabled class="layui-input layui-disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">请选择性别</label>
                     <div class="layui-input-block">
                         <select name="sex" lay-verify="">
@@ -62,6 +75,42 @@
                         <select name="classid" lay-verify="" lay-search>
                             <option value="">请选择班级</option>
                         </select>
+                    </div>
+                </div>
+                <div class="layui-form-item address x-city" id="address">
+                    <label class="layui-form-label">居住地址</label>
+                    <div class="layui-input-inline">
+                        <select name="province" lay-filter="province">
+                            <option value="">请选择省</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="city" lay-filter="city">
+                            <option value="">请选择市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="area" lay-filter="area">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" required lay-verify="required" placeholder="学生邮箱" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" required lay-verify="required" placeholder="学生邮箱" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">一寸头像</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userfaceimgurl" disabled placeholder="一寸头像" autocomplete="off" class="layui-input layui-disabled">
                     </div>
                 </div>
                 <div class="layui-form-item">

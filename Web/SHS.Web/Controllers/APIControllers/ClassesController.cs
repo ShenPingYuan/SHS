@@ -38,7 +38,7 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 dtos[i].InstructorName = (await _teacherRepository
                     .LoadEntitiesAsIQueryable(x => x.TeacherId == dtos[i].TeacherId)
-                    .FirstOrDefaultAsync())
+                    .FirstOrDefaultAsync())?
                     .TeacherName;
             }
             return new ResultData(ReturnCode.Succeed, dtos.Count(), "课程列表资源", dtos);
@@ -88,6 +88,13 @@ namespace SHS.Web.Controllers.APIControllers
             }
             await _classRepository.DeleteEntityAsync(@class);
             return NoContent();
+        }
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ClassDto>>> SearchClasss([FromQuery] int collegeid)
+        {
+            var classes =await _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == collegeid).ToListAsync();
+            var dtos = _mapper.Map<IEnumerable<ClassDto>>(classes);
+            return Ok(dtos);
         }
     }
 }

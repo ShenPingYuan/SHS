@@ -5,7 +5,7 @@
     layer = layui.layer;
 
     LoadTeachers();
-
+    LoadCollege();
     function LoadTeachers() {
         $.ajax({
             url: "/api/teachers/Instructors/",
@@ -29,7 +29,29 @@
             }
         });
     }
+    function LoadCollege() {
+        $.ajax({
+            url: "/api/colleges/",
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                var select = $("select[name='collegeid']");
+                for (var i = 0; i < res.length; i++) {
+                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
+                    select.append(html);
+                }
+                form.render();
+                var id = getQueryString("id");
+                if (id == "") {
+                    window.location.href = "/html/error.html";
+                } else {
+                    LoadInfo(id);
+                }
 
+            }
+        });
+    }
     function getQueryString(name) {
         var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
         if (result == null || result.length < 1) {

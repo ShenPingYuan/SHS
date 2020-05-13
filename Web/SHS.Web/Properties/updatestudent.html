@@ -23,45 +23,27 @@
         <div class="layui-row">
             <form class="layui-form layui-form-pane">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">学号</label>
+                    <label class="layui-form-label">学院名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="studentid" required lay-verify="required" placeholder="学号" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">学生名字</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="studentname" required lay-verify="required" placeholder="请输入学生名字" autocomplete="off" class="layui-input">
+                        <input type="text" name="coursename" required lay-verify="required" placeholder="请输入课程名字" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">EnglishName</label>
                     <div class="layui-input-block">
-                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入学生英文名" autocomplete="off" class="layui-input">
+                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入课程英文名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">密码</label>
+                    <label class="layui-form-label">课程学分</label>
                     <div class="layui-input-block">
-                        <input type="text" name="password" required lay-verify="required" placeholder="请输入学生密码" autocomplete="off" class="layui-input">
+                        <input type="text" name="coursescore" required lay-verify="required" placeholder="请输入课程学分" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">请选择性别</label>
+                    <label class="layui-form-label">是否为必修课</label>
                     <div class="layui-input-block">
-                        <select name="sex" lay-verify="">
-                            <option value="">请选择性别</option>
-                            <option value="男">男</option>
-                            <option value="女">女</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">更换班级</label>
-                    <div class="layui-input-block">
-                        <select name="classid" lay-verify="" lay-search>
-                            <option value="">请选择班级</option>
-                        </select>
+                        <input type="checkbox" name="iscompulsory" lay-skin="switch" lay-text="必修|选修">
                     </div>
                 </div>
                 <div class="layui-form-item">

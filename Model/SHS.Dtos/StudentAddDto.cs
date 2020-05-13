@@ -8,6 +8,6 @@ namespace SHS.Dtos
     {
         public string StudentName { get; set; }
         public int CollegeId { get; set; }
-
+        public int ClassId { get; set; }
     }
 }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/newstudentlist.js"></script>
+    <script src="/js/studentrolllist.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -55,10 +55,9 @@
                     </div>
                     <div class="layui-card-header">
                         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                        <button class="layui-btn" onclick="xadmin.open('添加学生','/html/studentadd.html',600,400)"><i class="layui-icon"></i>添加</button>
                     </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/students/newstudentlist',page:true,limits:[10,20,30,50],limit:30,id:'newstudents'}" lay-filter="newstudents">
+                        <table class="layui-table" lay-data="{url:'/api/students/',page:true,limits:[10,20,30,50],limit:30,id:'studentrolls'}" lay-filter="studentrolls">
                             <thead>
                                 <tr>
                                     <th lay-data="{type:'checkbox'}">ID</th>

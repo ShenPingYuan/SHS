@@ -4,43 +4,25 @@
     var $ = layui.jquery;
     layer = layui.layer;
 
-    var apibase = "/api/students/";
-
-    function getQueryString(name) {
-        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-        if (result == null || result.length < 1) {
-            return "";
+    $("select[name='collegeid']").change(function () {
+        if ($(this).val() != "") {
+            LoadClass($(this).val());
+        } else {
+            $("select[name='classid']").addClass("layui-disabled")
         }
-        return result[1];
-    }
-    LoadClass();
-    function LoadInfo(id) {
+    });
+
+    LoadCollege();
+    function LoadCollege() {
         $.ajax({
-            url: apibase + id,
+            url: "/api/colleges/",
             type: "GET",
             dataType: "json",
             async: false,
             success: function (res) {
-                $("input[name='studentid']").val(res.studentId);
-                $("input[name='studentname']").val(res.studentname);
-                $("input[name='englishname']").val(res.englishName);
-                $("input[name='password']").val(res.password);
-                $("select[name='sex']>option[value='" + res.sex + "']").attr("selected", true);
-                $("select[name='classid']>option[value='" + res.classId + "']").attr("selected", true);
-                form.render();
-            }
-        })
-    }
-    function LoadClass() {
-        $.ajax({
-            url: "/api/classes/",
-            type: "GET",
-            dataType: "json",
-            async: false,
-            success: function (res) {
-                var select = $("select[name='classid']");
+                var select = $("select[name='collegeid']");
                 for (var i = 0; i < res.length; i++) {
-                    var html = "<option value='" + res[i].classId + "'>" + res[i].className + "</option> ";
+                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
                     select.append(html);
                 }
                 form.render();
@@ -53,23 +35,37 @@
             }
         });
     }
-    form.on('submit(update)', function (data) {
+    function LoadClass(para) {
+        $.ajax({
+            url: "/api/classes/search?collegeid=" + para,
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                var select = $("select[name='classid']");
+                for (var i = 0; i < res.length; i++) {
+                    var html = "<option value='" + res[i].classId + "'>" + res[i].className + "</option> ";
+                    select.append(html);
+                }
+                $("select[name='classid']").removeClass("layui-disabled")
+                form.render();
+            }
+        });
+    }
+    form.on('submit(add)', function (data) {
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
         $.ajax({
-            url: apibase + data.field.studentid,
-            type: "PUT",
+            url: "/api/students/one/",
+            type: "POST",
             data: JSON.stringify({
-                "studentid": parseInt(data.field.studentid),
                 "studentname": data.field.studentname,
-                "englishname": data.field.englishname,
-                "sex": data.field.sex,
-                "password": data.field.password,
-                "classid": parseInt(data.field.classid),
+                "collegeid": data.field.collegeid,
+                "classid": data.field.classid,
             }),
             contentType: "application/json;",
             success: function (res) {
                 top.layer.close(index);
-                layer.alert("修改成功", {
+                layer.alert("添加成功", {
                     icon: 6,
                 }, function () {
                     xadmin.close();
@@ -78,7 +74,7 @@
             },
             error: function (res) {
                 top.layer.close(index);
-                layer.alert("修改失败", {
+                layer.alert("添加失败", {
                     icon: 6,
                     time: 1000
                 }, function () {
