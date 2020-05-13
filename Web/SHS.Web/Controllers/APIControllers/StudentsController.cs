@@ -24,19 +24,30 @@ namespace SHS.Web.Controllers.APIControllers
         private readonly IStudentRepository _studentRepository;
         public StudentsController(IStudentRepository studentRepository,
             ICollegeRepository collegeRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IClassRepository classRepository)
         {
             _collegeRepository = collegeRepository;
             _studentRepository = studentRepository;
+            _classRepository = classRepository;
             _mapper = mapper;
         }
         [HttpGet("newstudents")]
-        public async Task<ActionResult<ResultData>> GetNewStudnets()
+        public async Task<ActionResult<ResultData>> GetNewStudents()
         {
             var students =await _studentRepository.LoadEntitiesAsIQueryable(x => x.Year == DateTime.Now.Year)
                 .Include(x=>x.Class)
                 .ToListAsync();
             var dtos = _mapper.Map<IEnumerable<NewStudentListDto>>(students);
+            return new ResultData(ReturnCode.Succeed, dtos.Count(), "添加新生", dtos);
+        }
+        [HttpGet("newstudentlist")]
+        public async Task<ActionResult<ResultData>> GetNewStudentList()
+        {
+            var students = await _studentRepository.LoadEntitiesAsIQueryable(x => x.Year == DateTime.Now.Year)
+                .Include(x => x.Class)
+                .ToListAsync();
+            var dtos = _mapper.Map<IEnumerable<StudentDto>>(students);
             return new ResultData(ReturnCode.Succeed, dtos.Count(), "新生列表", dtos);
         }
         [HttpGet]
@@ -70,11 +81,14 @@ namespace SHS.Web.Controllers.APIControllers
                 return BadRequest();
             }
             var classCount = college.Classes.Count();
+            var @class1 = _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId)
+                .Include(x => x.Students);
             var @class = await _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId)
                 .Include(x => x.Students).OrderBy(x => x.Students.Count()).FirstOrDefaultAsync();
             if (@class == null || @class.Students.Count() > 50)
             {
-                int classId = Convert.ToInt32(DateTime.Now.ToString("ssMMHH"));
+                int classId = Convert.ToInt32(dto.CollegeId.ToString()
+                    .Substring(dto.CollegeId.ToString().Length-2,2)+(college.Classes.Count()+1));
                 @class = new Class
                 {
                     ClassId = classId,
@@ -101,7 +115,7 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 lastTwoOfClass = "0" + classCount.ToString();
             }
-            var strstudentId = DateTime.Now.Year + college.CollegeId.ToString()
+            var strstudentId = DateTime.Now.Year.ToString().Substring(2,2) + college.CollegeId.ToString()
                 .Substring(college.CollegeId.ToString().Length - 3) + lastTwoOfClass + lastTwoOfStudent;
             var studentId = Convert.ToInt32(strstudentId);
             Student student = new Student
@@ -109,7 +123,8 @@ namespace SHS.Web.Controllers.APIControllers
                 StudentId = studentId,
                 StudentName = dto.StudentName,
                 Class = @class,
-                Year=DateTime.Now.Year
+                Year = DateTime.Now.Year,
+                Password = studentId.ToString(),
             };
             await _studentRepository.AddEntityAsync(student);
             return NoContent();

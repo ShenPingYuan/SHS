@@ -37,6 +37,13 @@ namespace SHS.Web.Controllers.APIControllers
             var dtos = _mapper.Map<List<CollegeDto>>(colleges);
             return new ResultData(ReturnCode.Succeed, -1, "学院列表", dtos);
         }
+        [HttpGet("simplecolleges")]
+        public async Task<ActionResult<IEnumerable<CollegeDto>>> GetCollegesSimple()
+        {
+            var colleges = await _collegeRepository.GetAllEntitiesAsIQueryable().ToListAsync();
+            var dtos = _mapper.Map<IEnumerable<CollegeDto>>(colleges);
+            return Ok(dtos);
+    }
         [HttpGet("{collegeId}")]
         public async Task<ActionResult<CollegeDto>> GetCollege(int collegeId)
         {

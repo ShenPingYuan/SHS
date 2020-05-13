@@ -227,10 +227,8 @@ namespace SHS.Data.Migrations
             modelBuilder.Entity("SHS.Entities.Class", b =>
                 {
                     b.Property<int>("ClassId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnName("classId")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("ClassName")
                         .HasColumnName("className")

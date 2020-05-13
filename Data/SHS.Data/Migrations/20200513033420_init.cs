@@ -77,8 +77,7 @@ namespace SHS.Data.Migrations
                 name: "tb_class",
                 columns: table => new
                 {
-                    classId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    classId = table.Column<int>(nullable: false),
                     className = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     InstructorId = table.Column<int>(nullable: true),
                     InstructorName = table.Column<string>(nullable: true),

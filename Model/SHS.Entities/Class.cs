@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SHS.Entities
@@ -15,6 +16,7 @@ namespace SHS.Entities
         /// 班级号
         /// </summary>
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ClassId { get; set; }
         /// <summary>
         /// 班级名字
