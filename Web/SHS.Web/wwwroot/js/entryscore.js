@@ -5,16 +5,17 @@
     var form = layui.form;
     var apibase = "/api/scs/";
 
+
     LoadCourses();
-    LoadCollege();
-    form.on('select(collegeid)', function (data) {
-        $("select[name='classid']").html("<option value=''>请选择班级<option>");
+    form.on('select(courseid)', function (data) {
+        $("select[name='classid']").html("<option value=''>请选择学生<option>");
+
         form.render();
         if (data.value != "") {
             LoadClass(data.value);
         } else {
-            $("select[name='classid']").addClass("layui-disabled")
-            $("select[name='classid']").prop("disabled", true);
+            $("select[name='studentid']").addClass("layui-disabled")
+            $("select[name='studentid']").prop("disabled", true);
         }
     });
     function LoadCourses() {
@@ -34,44 +35,7 @@
         })
     }
 
-    function LoadCollege() {
-        $.ajax({
-            url: "/api/colleges/simplecolleges/",
-            type: "GET",
-            dataType: "json",
-            async: false,
-            success: function (res) {
-                var s = $("select[name='collegeid']");
-                for (var i = 0; i < res.length; i++) {
-                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
-                    s.append(html);
-                }
-                form.render();
-            },
-            error: function (res) {
-                window.location.href = "/html/error.html";
-            }
-        });
-    }
-    function LoadClass(para) {
-        $.ajax({
-            url: "/api/classes/search?collegeid=" + para,
-            type: "GET",
-            dataType: "json",
-            async: false,
-            success: function (res) {
-                var select = $("select[name='classid']");
-                for (var i = 0; i < res.length; i++) {
-                    var html = "<option value='" + res[i].classId + "'>" + res[i].className + "</option> ";
-                    select.append(html);
-                }
-                $("select[name='classid']").removeClass("layui-disabled")
-                $("select[name='classid']").prop("disabled", false);
-                form.render();
-            }
-        });
-    }
-    table.on('tool(scs)',
+    table.on('tool(scores)',
         function (obj) {
             var event = obj.event;
             var data = obj.data;
@@ -109,15 +73,16 @@
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.5 });
         $.ajax({
             url: apibase,
-            type: "POST",
+            type: "PUT",
             data: JSON.stringify({
                 "courseid": parseInt(data.field.courseid),
-                "classid": parseInt(data.field.classid),
+                "studentid": parseInt(data.field.studentid),
+                "score": parseFloat(data.field.score),
             }),
             contentType: "application/json;",
             success: function (res) {
                 top.layer.close(index);
-                layer.alert("添加成功", {
+                layer.alert("录入成功", {
                     icon: 6,
                 }, function () {
                     location.reload();
@@ -125,7 +90,7 @@
             },
             error: function (res) {
                 top.layer.close(index);
-                layer.alert("添加失败", {
+                layer.alert("录入失败", {
                     icon: 6,
                     time: 1000
                 }, function () {
@@ -135,8 +100,8 @@
         return false;
     });
 });
-function delAllSc() {
-    var checkStatus = layui.table.checkStatus('scs');
+function delAllScore() {
+    var checkStatus = layui.table.checkStatus('scores');
     var datas = checkStatus.data;
     CourseIds = [];
     StudentIds = [];
@@ -145,10 +110,10 @@ function delAllSc() {
             CourseIds.push(parseInt(datas[i].courseId));
             StudentIds.push(parseInt(datas[i].studentId))
         }
-        layer.confirm('确认要删除选中选课信息吗？', { icon: 3, title: '提示信息' }, function (index) {
+        layer.confirm('确认要删除选中的成绩信息吗？', { icon: 3, title: '提示信息' }, function (index) {
             $.ajax({
                 url: "/api/scs/",
-                type: "Delete",
+                type: "PUT",
                 data: {
                     CourseIds: CourseIds,
                     StudentIds: StudentIds

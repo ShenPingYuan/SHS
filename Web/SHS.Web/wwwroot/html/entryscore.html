@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/selectcourse.js"></script>
+    <script src="/js/entryscore.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -46,35 +46,33 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">学院</label>
+                                <label class="layui-form-label">请输入学生学号</label>
                                 <div class="layui-input-inline">
-                                    <select name="collegeid" lay-verify="required" lay-search lay-filter="collegeid">
-                                        <option value="">请选择选修该课程的班级所在学院</option>
+                                    <select name="studentid" lay-verify="required" lay-search lay-filter="collegeid">
+                                        <option value="">请选择学生</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">班级</label>
+                                <label class="layui-form-label">请输入学生成绩</label>
                                 <div class="layui-input-inline">
-                                    <select name="classid" lay-verify="required" lay-search>
-                                        <option value="">请选择选修该课程的班级</option>
-                                    </select>
+                                    <input type="text" name="score" placeholder="请输入成绩" autocomplete="off" class="layui-input">
                                 </div>
+                                <div class="layui-form-mid layui-word-aux">该科目分数</div>
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit lay-filter="add">添加</button>
+                                    <button class="layui-btn" lay-submit lay-filter="add">录入</button>
                                     <button type="reset" class="layui-btn layui-btn-primary btn-reset">重置</button>
                                 </div>
                             </div>
-
                         </form>
                     </blockquote>
                     <div class="layui-card-header">
-                        <button class="layui-btn layui-btn-danger" onclick="delAllSc()"><i class="layui-icon"></i>批量删除</button>
+                        <button class="layui-btn layui-btn-danger" onclick="delAllScore()"><i class="layui-icon"></i>批量删除</button>
                     </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/scs/',page:true,limits:[10,20,30,50],limit:30,id:'scs'}" lay-filter="scs">
+                        <table class="layui-table" lay-data="{url:'/api/scs/scores',page:true,limits:[10,20,30,50],limit:30,id:'scores'}" lay-filter="scores">
                             <thead>
                                 <tr>
                                     <th lay-data="{type:'checkbox'}">ID</th>
@@ -82,6 +80,7 @@
                                     <th lay-data="{field:'courseName'}">课程名</th>
                                     <th lay-data="{field:'studentId'}">选课学生学号</th>
                                     <th lay-data="{field:'studentName'}">选课学生名</th>
+                                    <th lay-data="{field:'score'}">所得成绩</th>
                                     <th lay-data="{field:'description'}">描述</th>
                                     <th lay-data="{templet: '#toolbarEdit'}">操作</th>
                                 </tr>
