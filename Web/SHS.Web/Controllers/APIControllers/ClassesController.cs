@@ -56,7 +56,7 @@ namespace SHS.Web.Controllers.APIControllers
             var dto = _mapper.Map<ClassDto>(@class);
             dto.InstructorName = (await _teacherRepository
                 .LoadEntitiesAsIQueryable(x => x.TeacherId == dto.TeacherId)
-                .FirstOrDefaultAsync()).TeacherName;
+                .FirstOrDefaultAsync())?.TeacherName;
             return dto;
         }
         [HttpPut("{id}")]

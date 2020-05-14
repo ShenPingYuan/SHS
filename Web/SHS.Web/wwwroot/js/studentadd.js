@@ -4,34 +4,32 @@
     var $ = layui.jquery;
     layer = layui.layer;
 
-    $("select[name='collegeid']").change(function () {
-        if ($(this).val() != "") {
-            LoadClass($(this).val());
+    form.on('select(collegeid)', function (data) {
+        $("select[name='classid']").html("<option value=''>请选择班级<option>");
+        form.render();
+        if (data.value != "") {
+            LoadClass(data.value);
         } else {
             $("select[name='classid']").addClass("layui-disabled")
         }
     });
-
     LoadCollege();
     function LoadCollege() {
         $.ajax({
-            url: "/api/colleges/",
+            url: "/api/colleges/simplecolleges/",
             type: "GET",
             dataType: "json",
             async: false,
             success: function (res) {
-                var select = $("select[name='collegeid']");
+                var s = $("select[name='collegeid']");
                 for (var i = 0; i < res.length; i++) {
                     var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
-                    select.append(html);
+                    s.append(html);
                 }
                 form.render();
-                var id = getQueryString("id");
-                if (id == "") {
-                    window.location.href = "/html/error.html";
-                } else {
-                    LoadInfo(id);
-                }
+            },
+            error: function (res) {
+                window.location.href = "/html/error.html";
             }
         });
     }
@@ -59,8 +57,8 @@
             type: "POST",
             data: JSON.stringify({
                 "studentname": data.field.studentname,
-                "collegeid": data.field.collegeid,
-                "classid": data.field.classid,
+                "collegeid": parseInt(data.field.collegeid),
+                "classid": parseInt(data.field.classid),
             }),
             contentType: "application/json;",
             success: function (res) {

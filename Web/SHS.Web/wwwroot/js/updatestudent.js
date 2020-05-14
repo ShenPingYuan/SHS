@@ -22,7 +22,7 @@
             async: false,
             success: function (res) {
                 $("input[name='studentid']").val(res.studentId);
-                $("input[name='studentname']").val(res.studentname);
+                $("input[name='studentname']").val(res.studentName);
                 $("input[name='englishname']").val(res.englishName);
                 $("input[name='password']").val(res.password);
                 $("select[name='sex']>option[value='" + res.sex + "']").attr("selected", true);
@@ -39,8 +39,8 @@
             async: false,
             success: function (res) {
                 var select = $("select[name='classid']");
-                for (var i = 0; i < res.length; i++) {
-                    var html = "<option value='" + res[i].classId + "'>" + res[i].className + "</option> ";
+                for (var i = 0; i < res.count; i++) {
+                    var html = "<option value='" + res.data[i].classId + "'>" + res.data[i].className + "</option> ";
                     select.append(html);
                 }
                 form.render();
@@ -50,6 +50,7 @@
                 } else {
                     LoadInfo(id);
                 }
+                form.render();
             }
         });
     }

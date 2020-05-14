@@ -5,6 +5,7 @@ using SHS.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace SHS.Web.Profiles
@@ -20,7 +21,7 @@ namespace SHS.Web.Profiles
                 .ForMember(d => d.Age, o => o.MapFrom(x =>DateTime.Now.Year-Convert.ToInt32(x.Birthday.Substring(0,4))));
             CreateMap<Student, StudentInfoDto>()
                 .ForMember(d => d.ClassName, o => o.MapFrom(x => x.Class.ClassName));
-            CreateMap<StudentInfoDto, Student>();
+            CreateMap<StudentInfoDto, Student>().ForAllMembers(opt => opt.Condition((src, dest, sourceMember) => sourceMember != null));
         }
     }
 }

@@ -38,6 +38,6 @@
     }
     function EditRow(para) {
         //编辑学院信息
-        xadmin.open('编辑', '/html/updateclass.html?collegeid=' + para);
+        xadmin.open('编辑', '/html/updateclass.html?id=' + para);
     }
 });

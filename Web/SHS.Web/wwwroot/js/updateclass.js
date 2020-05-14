@@ -5,7 +5,7 @@
     layer = layui.layer;
 
     LoadTeachers();
-    LoadCollege();
+    //LoadCollege();
     function LoadTeachers() {
         $.ajax({
             url: "/api/teachers/Instructors/",
@@ -19,13 +19,7 @@
                     select.append(html);
                 }
                 form.render();
-                var id = getQueryString("id");
-                if (id == "") {
-                    window.location.href = "/html/error.html";
-                } else {
-                    LoadInfo(id);
-                }
-
+                LoadCollege();
             }
         });
     }
@@ -37,8 +31,8 @@
             async: false,
             success: function (res) {
                 var select = $("select[name='collegeid']");
-                for (var i = 0; i < res.length; i++) {
-                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
+                for (var i = 0; i < res.count; i++) {
+                    var html = "<option value='" + res.data[i].collegeId + "'>" + res.data[i].collegeName + "</option> ";
                     select.append(html);
                 }
                 form.render();

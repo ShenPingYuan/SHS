@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SHS.Core;
@@ -36,8 +33,8 @@ namespace SHS.Web.Controllers.APIControllers
         [HttpGet("newstudents")]
         public async Task<ActionResult<ResultData>> GetNewStudents()
         {
-            var students =await _studentRepository.LoadEntitiesAsIQueryable(x => x.Year == DateTime.Now.Year)
-                .Include(x=>x.Class)
+            var students = await _studentRepository.LoadEntitiesAsIQueryable(x => x.Year == DateTime.Now.Year)
+                .Include(x => x.Class)
                 .ToListAsync();
             var dtos = _mapper.Map<IEnumerable<NewStudentListDto>>(students);
             return new ResultData(ReturnCode.Succeed, dtos.Count(), "添加新生", dtos);
@@ -63,7 +60,7 @@ namespace SHS.Web.Controllers.APIControllers
         [HttpGet("{id}")]
         public async Task<ActionResult<StudentInfoDto>> GetStudent(int id)
         {
-            var student =await _studentRepository.LoadEntitiesAsIQueryable(x => x.StudentId == id)
+            var student = await _studentRepository.LoadEntitiesAsIQueryable(x => x.StudentId == id)
                 .FirstOrDefaultAsync();
             if (student == null)
             {
@@ -88,7 +85,7 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 var test = dto.CollegeId.ToString().Substring(dto.CollegeId.ToString().Length - 2, 2) + (college.Classes.Count() + 1);
                 int classId = Convert.ToInt32(dto.CollegeId.ToString()
-                    .Substring(dto.CollegeId.ToString().Length-2,2)+(college.Classes.Count()+1));
+                    .Substring(dto.CollegeId.ToString().Length - 2, 2) + (college.Classes.Count() + 1));
                 @class = new Class
                 {
                     ClassId = classId,
@@ -115,10 +112,10 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 lastTwoOfClass = "0" + classCount.ToString();
             }
-            var strstudentId = DateTime.Now.Year.ToString().Substring(2,2) + college.CollegeId.ToString()
+            var strstudentId = DateTime.Now.Year.ToString().Substring(2, 2) + college.CollegeId.ToString()
                 .Substring(college.CollegeId.ToString().Length - 3) + lastTwoOfClass + lastTwoOfStudent;
             var studentId = Convert.ToInt32(strstudentId);
-            while((await _studentRepository.LoadEntitiesAsIQueryable(x => x.StudentId == studentId).FirstOrDefaultAsync())!=null)
+            while ((await _studentRepository.LoadEntitiesAsIQueryable(x => x.StudentId == studentId).FirstOrDefaultAsync()) != null)
             {
                 studentId++;
             }
@@ -147,7 +144,7 @@ namespace SHS.Web.Controllers.APIControllers
             return NoContent();
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id,[FromBody]StudentInfoDto dto)
+        public async Task<ActionResult> Update(int id, [FromBody]StudentInfoDto dto)
         {
             if (id != dto.StudentId)
             {
@@ -160,21 +157,29 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 return NotFound();
             }
-            student = _mapper.Map<Student>(dto);
+            _mapper.Map(dto, student);
             await _studentRepository.EditEntityAsync(student);
             return NoContent();
         }
         [HttpPost("one")]
         public async Task<ActionResult> CreateAstudent([FromBody]StudentAddDto dto)
         {
-            var @class =await _classRepository.LoadEntitiesAsIQueryable(x => x.ClassId == dto.ClassId).FirstOrDefaultAsync();
-            var college=await _collegeRepository.LoadEntitiesAsIQueryable(x=>x.CollegeId==dto.CollegeId).FirstOrDefaultAsync();
-            if (@class == null||college==null)
+            var @class = await _classRepository.LoadEntitiesAsIQueryable(x => x.ClassId == dto.ClassId).FirstOrDefaultAsync();
+            var college = await _collegeRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == dto.CollegeId).FirstOrDefaultAsync();
+            if (@class == null || college == null)
             {
                 return NotFound();
             }
-            int studentId = Convert.ToInt32(DateTime.Now.ToString("yyyyMMSS") + DateTime.Now.Day.ToString().Substring(DateTime.Now.Day.ToString().Length - 1));
-
+            var lastStudent = await _studentRepository.GetAllEntitiesAsIQueryable().OrderBy(x => x.StudentId).LastOrDefaultAsync();
+            int studentId;
+            if (lastStudent != null)
+            {
+                studentId = lastStudent.StudentId + 1;
+            }
+            else
+            {
+                studentId = Convert.ToInt32(DateTime.Now.ToString("yyyyMMss") + DateTime.Now.Day.ToString().Substring(DateTime.Now.Day.ToString().Length - 1));
+            }
             Student student = new Student
             {
                 StudentId = studentId,
