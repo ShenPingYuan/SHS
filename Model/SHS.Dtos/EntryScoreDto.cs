@@ -9,6 +9,8 @@ namespace SHS.Dtos
     {
         public int CourseId { get; set; }
         public int StudentId { get; set; }
+        public string CourseName { get; set; }
+        public string StudentName { get; set; }
         public float Score { get; set; }
     }
 }

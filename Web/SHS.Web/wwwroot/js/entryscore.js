@@ -8,11 +8,10 @@
 
     LoadCourses();
     form.on('select(courseid)', function (data) {
-        $("select[name='classid']").html("<option value=''>请选择学生<option>");
-
+        $("select[name='studentid']").html("<option value=''>请选择学生<option>");
         form.render();
         if (data.value != "") {
-            LoadClass(data.value);
+            LoadStudent(data.value)
         } else {
             $("select[name='studentid']").addClass("layui-disabled")
             $("select[name='studentid']").prop("disabled", true);
@@ -34,7 +33,22 @@
             }
         })
     }
-
+    function LoadStudent(courseid) {
+        $.ajax({
+            url: "/api/scs/searchstudents?courseid=" + courseid,
+            type: "GET",
+            dataType: "json",
+            async: true,
+            success: function (res) {
+                var s = $("select[name='studentid']");
+                for (var i = 0; i < res.length; i++) {
+                    var html = "<option value='" + res[i].studentId + "'>" + res[i].studentId + res[i].studentName + "</option> ";
+                    s.append(html);
+                }
+                form.render();
+            }
+        })
+    }
     table.on('tool(scores)',
         function (obj) {
             var event = obj.event;
@@ -112,8 +126,8 @@ function delAllScore() {
         }
         layer.confirm('确认要删除选中的成绩信息吗？', { icon: 3, title: '提示信息' }, function (index) {
             $.ajax({
-                url: "/api/scs/",
-                type: "PUT",
+                url: "/api/scs/scores/",
+                type: "DELETE",
                 data: {
                     CourseIds: CourseIds,
                     StudentIds: StudentIds

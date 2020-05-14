@@ -22,7 +22,7 @@ namespace SHS.Web.Controllers.APIControllers
         private readonly IMapper _mapper;
         private readonly IStudentCourseRepository _studentCourseRepository;
         private readonly IStudentRepository _studentRepository;
-        public SCsController(IMapper mapper,IStudentCourseRepository studentCourseRepository,
+        public SCsController(IMapper mapper, IStudentCourseRepository studentCourseRepository,
             IStudentRepository studentRepository,
             ICourseRepository courseRepository)
         {
@@ -35,19 +35,28 @@ namespace SHS.Web.Controllers.APIControllers
         public async Task<ActionResult<ResultData>> GetScs()
         {
             var scs = await _studentCourseRepository.GetAllEntitiesAsIQueryable()
-                .Include(x=>x.Student)
-                .Include(x=>x.Course).ToListAsync();
+                .Include(x => x.Student)
+                .Include(x => x.Course).ToListAsync();
             var dtos = _mapper.Map<IEnumerable<StudentCourseDto>>(scs);
             return new ResultData(ReturnCode.Succeed, scs.Count(), "选课信息", dtos);
         }
         [HttpGet("scores")]
         public async Task<ActionResult<ResultData>> GetScores()
         {
-            var scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x=>x.Score!=null)
+            var scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.Score != null)
                 .Include(x => x.Student)
                 .Include(x => x.Course).ToListAsync();
             var dtos = _mapper.Map<IEnumerable<EntryScoreDto>>(scs);
             return new ResultData(ReturnCode.Succeed, scs.Count(), "成绩信息", dtos);
+        }
+        [HttpGet("searchstudents")]
+        public async Task<ActionResult<IEnumerable<SimpleStudentDto>>> GetStudentsOfCourse([FromQuery]int courseId)
+        {
+            var scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.CourseId == courseId)
+                .Include(x => x.Student)
+                .ToListAsync();
+            var dtos = _mapper.Map<IEnumerable<SimpleStudentDto>>(scs);
+            return Ok(dtos);
         }
         [HttpPost]
         public async Task<ActionResult> SelectCourse([FromBody]SelectCourseDto dto)
@@ -57,7 +66,7 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 return BadRequest();
             }
-            var students =await _studentRepository.LoadEntitiesAsIQueryable(x => x.ClassId == dto.ClassId).ToListAsync();
+            var students = await _studentRepository.LoadEntitiesAsIQueryable(x => x.ClassId == dto.ClassId).ToListAsync();
             foreach (var item in students)
             {
                 StudentCourse sc = new StudentCourse
@@ -65,7 +74,7 @@ namespace SHS.Web.Controllers.APIControllers
                     Course = course,
                     Student = item,
                 };
-                var dbsc =await _studentCourseRepository
+                var dbsc = await _studentCourseRepository
                     .LoadEntitiesAsIQueryable(x => x.CourseId == course.CourseId && x.StudentId == item.StudentId)
                     .FirstOrDefaultAsync();
                 if (dbsc != null)
@@ -79,13 +88,13 @@ namespace SHS.Web.Controllers.APIControllers
         [HttpDelete]
         public async Task<ActionResult> DeleteRange([FromForm]List<int> courseIds, [FromForm]List<int> studentIds)
         {
-            if(courseIds.Count()!=studentIds.Count())
+            if (courseIds.Count() != studentIds.Count())
             {
                 return BadRequest();
             }
             for (int i = 0; i < courseIds.Count(); i++)
             {
-                var sc =await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.CourseId == courseIds[i] && x.StudentId == studentIds[i])
+                var sc = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.CourseId == courseIds[i] && x.StudentId == studentIds[i])
                     .FirstOrDefaultAsync();
                 if (sc == null)
                 {
@@ -109,7 +118,7 @@ namespace SHS.Web.Controllers.APIControllers
             await _studentCourseRepository.EditEntityAsync(sc);
             return NoContent();
         }
-        [HttpDelete]
+        [HttpDelete("scores")]
         public async Task<ActionResult> DeleteScores([FromForm]List<int> courseIds, [FromForm]List<int> studentIds)
         {
             if (courseIds.Count() != studentIds.Count())
@@ -128,6 +137,40 @@ namespace SHS.Web.Controllers.APIControllers
                 await _studentCourseRepository.EditEntityAsync(sc);
             }
             return NoContent();
+        }
+        [HttpGet("search")]
+        public async Task<ActionResult<ResultData>> SearchScore([FromQuery]int collegeId, [FromQuery]int classId, 
+            [FromQuery]int studentId, [FromQuery]int courseId)
+        {
+            List<StudentCourse> scs;
+            if (collegeId != 0)
+            {
+                scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.Student.Class.CollegeId == collegeId)
+                    .Include(x=>x.Student).Include(x=>x.Course)
+                    .ToListAsync();
+            }
+            else if (classId != 0)
+            {
+                scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.Student.ClassId == classId)
+                    .Include(x => x.Student).Include(x => x.Course).ToListAsync();
+            }
+            else if (studentId != 0)
+            {
+                scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.StudentId == studentId)
+                    .Include(x => x.Student).Include(x => x.Course).ToListAsync();
+            }
+            else if (courseId != 0)
+            {
+                scs = await _studentCourseRepository.LoadEntitiesAsIQueryable(x => x.CourseId == courseId)
+                    .Include(x => x.Student).Include(x => x.Course).ToListAsync();
+            }
+            else
+            {
+                scs = await _studentCourseRepository.GetAllEntitiesAsIQueryable()
+                    .Include(x => x.Student).Include(x => x.Course).ToListAsync();
+            }
+            var dtos = _mapper.Map<IEnumerable<EntryScoreDto>>(scs);
+            return new ResultData(ReturnCode.Succeed,dtos.Count(),"查询结果",dtos);
         }
     }
 }

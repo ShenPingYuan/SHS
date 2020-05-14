@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/entryscore.js"></script>
+    <script src="/js/searchscore.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -38,63 +38,57 @@
                     <blockquote class="layui-elem-quote quoteBox">
                         <form class="layui-form layui-form-pane" action="">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">课程</label>
+                                <label class="layui-form-label">按学院</label>
                                 <div class="layui-input-inline">
-                                    <select name="courseid" lay-verify="required" lay-filter="courseid" class="" lay-search>
-                                        <option value="">请选择一门课程</option>
+                                    <select name="collegeid" lay-filter="collegeid" class="" lay-search>
+                                        <option value="">请选择学院</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">请输入学生学号</label>
+                                <label class="layui-form-label">按班级</label>
                                 <div class="layui-input-inline">
-                                    <select name="studentid" lay-verify="required" lay-search lay-filter="collegeid">
+                                    <select name="classid" lay-search lay-filter="classid">
+                                        <option value="">请选择班级</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">按学生</label>
+                                <div class="layui-input-inline">
+                                    <select name="studentid" lay-search lay-filter="studentid">
                                         <option value="">请选择学生</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">请输入学生成绩</label>
+                                <label class="layui-form-label">按科目</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="score" placeholder="请输入成绩" autocomplete="off" class="layui-input">
+                                    <select name="courseid" lay-search lay-filter="courseid">
+                                        <option value="">请选择科目</option>
+                                    </select>
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">该科目分数</div>
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit lay-filter="add">录入</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary btn-reset">重置</button>
+                                    <button class="layui-btn" id="searchbtn" lay-submit lay-filter="search">
+                                        <i class="layui-icon">&#xe615;</i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </blockquote>
-                    <div class="layui-card-header">
-                        <button class="layui-btn layui-btn-danger" onclick="delAllScore()"><i class="layui-icon"></i>批量删除</button>
-                    </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/scs/scores',page:true,limits:[10,20,30,50],limit:30,id:'scores'}" lay-filter="scores">
-                            <thead>
-                                <tr>
-                                    <th lay-data="{type:'checkbox'}">ID</th>
-                                    <th lay-data="{field:'courseId',  sort: true}">课程号</th>
-                                    <th lay-data="{field:'courseName'}">课程名</th>
-                                    <th lay-data="{field:'studentId'}">选课学生学号</th>
-                                    <th lay-data="{field:'studentName'}">选课学生名</th>
-                                    <th lay-data="{field:'score'}">所得成绩</th>
-                                    <th lay-data="{field:'description'}">描述</th>
-                                    <th lay-data="{templet: '#toolbarEdit'}">操作</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <table id="scs" lay-filter="scs"></table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/html" id="toolbarEdit">
-        <a title="删除" lay-event="delete" href="javascript:;">
-            <i class="layui-icon">&#xe640;</i>
-        </a>
+    <script type="text/html" id="toolbarscore">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm"> 打印或者导出数据到文件： </button>
+        </div>
     </script>
 </body>
 </html>
