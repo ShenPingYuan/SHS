@@ -25,14 +25,14 @@
     }
     function LoadCollege() {
         $.ajax({
-            url: "/api/colleges/",
+            url: "/api/colleges/simplecolleges",
             type: "GET",
             dataType: "json",
             async: false,
             success: function (res) {
                 var select = $("select[name='collegeid']");
-                for (var i = 0; i < res.count; i++) {
-                    var html = "<option value='" + res.data[i].collegeId + "'>" + res.data[i].collegeName + "</option> ";
+                for (var i = 0; i < res.length; i++) {
+                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
                     select.append(html);
                 }
                 form.render();
@@ -77,6 +77,7 @@
             data: JSON.stringify({
                 "classid": parseInt(data.field.classid),
                 "classname": data.field.classname,
+                "collegeid": parseInt(data.field.collegeid),
                 "englishname": data.field.englishname,
                 "teacherid": parseInt(data.field.teacherid),
             }),

@@ -178,10 +178,10 @@ namespace SHS.Web.Controllers.APIControllers
             return Ok(deans);
         }
         [HttpGet("Instructors")]
-        public async Task<ActionResult<IEnumerable<DeanTeacherDto>>> GetInstructors()
+        public async Task<ActionResult<IEnumerable<InstructorTeacherDto>>> GetInstructors()
         {
             var teachers = await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
-            var Instructors = _mapper.Map<IEnumerable<DeanTeacherDto>>(teachers);
+            var Instructors = _mapper.Map<IEnumerable<InstructorTeacherDto>>(teachers);
             return Ok(Instructors);
         }
     }

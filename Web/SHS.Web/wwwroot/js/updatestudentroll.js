@@ -1,8 +1,9 @@
-﻿layui.use(['table', 'form', 'jquery', 'layer','laydate'], function () {
+﻿var form,$;
+layui.use(['table', 'form', 'jquery', 'layer', 'laydate'], function () {
     var laydate = layui.laydate;
     var table = layui.table;
-    var form = layui.form;
-    var $ = layui.jquery;
+    form = layui.form;
+    $ = layui.jquery;
     layer = layui.layer;
 
     var apibase = "/api/students/";
@@ -14,7 +15,7 @@
         }
         return result[1];
     }
-    LoadClass();
+    LoadCollege();
     function LoadInfo(id) {
         $.ajax({
             url: apibase + id,
@@ -22,27 +23,62 @@
             dataType: "json",
             async: false,
             success: function (res) {
+                LoadClass(res.collegeId);
                 $("input[name='studentid']").val(res.studentId);
-                $("input[name='studentname']").val(res.studentname);
+                $("input[name='studentname']").val(res.studentName);
                 $("input[name='englishname']").val(res.englishName);
                 $("input[name='password']").val(res.password);
                 $("input[name='birthday']").val(res.birthday);
                 $("input[name='age']").val(res.age);
                 $("input[name='email']").val(res.email);
-                $("input[name='province']").val(res.province);
+                $('#address').xcity(res.province, res.city, res.area);
                 $("input[name='userfaceimgurl']").val(res.userFaceImgUrl);
-                $("input[name='city']").val(res.city);
-                $("input[name='area']").val(res.area);
                 $("input[name='description']").val(res.description);
                 $("select[name='sex']>option[value='" + res.sex + "']").attr("selected", true);
                 $("select[name='classid']>option[value='" + res.classId + "']").attr("selected", true);
+                $("select[name='collegeid']>option[value='" + res.collegeId + "']").attr("selected", true);
                 form.render();
             }
         })
     }
-    function LoadClass() {
+    form.on('select(collegeid)', function (data) {
+        $("select[name='classid']").html("<option value=''>请选择班级<option>");
+        form.render();
+        if (data.value != "") {
+            LoadClass(data.value);
+        } else {
+            $("select[name='classid']").addClass("layui-disabled")
+        }
+    });
+    function LoadCollege() {
         $.ajax({
-            url: "/api/classes/",
+            url: "/api/colleges/simplecolleges/",
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                var s = $("select[name='collegeid']");
+                for (var i = 0; i < res.length; i++) {
+                    var html = "<option value='" + res[i].collegeId + "'>" + res[i].collegeName + "</option> ";
+                    s.append(html);
+                }
+                form.render();
+                var id = getQueryString("id");
+                if (id != "") {
+                    LoadInfo(id);
+                } else {
+                    window.location.href = "/html/error.html";
+                }
+                
+            },
+            error: function (res) {
+                window.location.href = "/html/error.html";
+            }
+        });
+    }
+    function LoadClass(para) {
+        $.ajax({
+            url: "/api/classes/search?collegeid=" + para,
             type: "GET",
             dataType: "json",
             async: false,
@@ -52,13 +88,8 @@
                     var html = "<option value='" + res[i].classId + "'>" + res[i].className + "</option> ";
                     select.append(html);
                 }
+                $("select[name='classid']").removeClass("layui-disabled")
                 form.render();
-                var id = getQueryString("id");
-                if (id == "") {
-                    window.location.href = "/html/error.html";
-                } else {
-                    LoadInfo(id);
-                }
             }
         });
     }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>学院列表-SHS</title>
+    <title>课程列表-SHS</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script src="/js/classlist.js"></script>
+    <script src="/js/selectcourse.js"></script>
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -44,7 +44,7 @@
                                 <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="collegeName" placeholder="请输入课程名" autocomplete="off" class="layui-input">
+                                <input type="text" name="collegeName" placeholder="请输入学生名" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="layui-btn" lay-submit="" lay-filter="sreach">
@@ -55,19 +55,20 @@
                     </div>
                     <div class="layui-card-header">
                         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                        <button class="layui-btn" onclick="xadmin.open('添加班级','/html/classadd.html',600,400)"><i class="layui-icon"></i>添加</button>
+                        <button class="layui-btn" onclick="xadmin.open('添加学生','/html/studentadd.html',600,400)"><i class="layui-icon"></i>添加</button>
                     </div>
                     <div class="layui-card-body ">
-                        <table class="layui-table" lay-data="{url:'/api/classes',page:true,limits:[10,20,30,50],limit:30,id:'classes'}" lay-filter="classes">
+                        <table class="layui-table" lay-data="{url:'/api/students/newstudentlist',page:true,limits:[10,20,30,50],limit:30,id:'newstudents'}" lay-filter="newstudents">
                             <thead>
                                 <tr>
                                     <th lay-data="{type:'checkbox'}">ID</th>
-                                    <th lay-data="{field:'classId',  sort: true}">班级ID</th>
+                                    <th lay-data="{field:'studentId',  sort: true}">学生学号</th>
+                                    <th lay-data="{field:'studentName'}">学生名字</th>
+                                    <th lay-data="{field:'year'}">年级名</th>
                                     <th lay-data="{field:'className'}">班级名</th>
-                                    <th lay-data="{field:'englishName'}">英文名</th>
-                                    <th lay-data="{field:'instructorName'}">辅导员</th>
-                                    <th lay-data="{field:'collegeName'}">所属学院</th>
-                                    <th lay-data="{field:'description'}">描述</th>
+                                    <th lay-data="{field:'sex'}">性别</th>
+                                    <th lay-data="{field:'age'}">年龄</th>
+                                    <th lay-data="{field:'description'}">学生描述</th>
                                     <th lay-data="{templet: '#toolbarEdit'}">操作</th>
                                 </tr>
                             </thead>

@@ -9,10 +9,6 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
-    <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/js/xadmin.js"></script>
-    <script type="text/javascript" src="/js/xcity.js"></script>
-    <script src="/js/updatestudentroll.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
         <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -25,43 +21,43 @@
             <form class="layui-form layui-form-pane">
                 <div class="layui-form-item">
                     <label class="layui-form-label">学号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="studentid" required lay-verify="required" placeholder="学号" autocomplete="off" class="layui-input">
+                    <div class="layui-input-inline">
+                        <input type="text" name="studentid" disabled required lay-verify="required" placeholder="学号" autocomplete="off" class="layui-input layui-disabled">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">学生名字</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <input type="text" name="studentname" required lay-verify="required" placeholder="请输入学生名字" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">EnglishName</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入学生英文名" autocomplete="off" class="layui-input">
+                    <div class="layui-input-inline">
+                        <input type="text" name="englishname" placeholder="请输入学生英文名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">密码</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <input type="text" name="password" required lay-verify="required" placeholder="请输入学生密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">出生日期</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <input class="layui-input" autocomplete="off" placeholder="出生日期" name="birthday" id="birthday">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">年龄</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="age" required lay-verify="required" placeholder="学生年龄" autocomplete="off" disabled class="layui-input layui-disabled">
+                    <div class="layui-input-inline">
+                        <input type="text" name="age" placeholder="学生年龄" autocomplete="off" disabled class="layui-input layui-disabled">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">请选择性别</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <select name="sex" lay-verify="">
                             <option value="">请选择性别</option>
                             <option value="男">男</option>
@@ -70,9 +66,17 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">更换班级</label>
-                    <div class="layui-input-block">
-                        <select name="classid" lay-verify="" lay-search>
+                    <label class="layui-form-label">选择学院</label>
+                    <div class="layui-input-inline">
+                        <select name="collegeid" lay-search required lay-verify="required" lay-filter="collegeid">
+                            <option value="">选择学院</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择班级</label>
+                    <div class="layui-input-inline">
+                        <select name="classid" lay-search required lay-verify="required" class="disabled">
                             <option value="">请选择班级</option>
                         </select>
                     </div>
@@ -97,20 +101,20 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">邮箱</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="email" required lay-verify="required" placeholder="学生邮箱" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">邮箱</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="email" required lay-verify="required" placeholder="学生邮箱" autocomplete="off" class="layui-input">
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" placeholder="学生邮箱" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">一寸头像</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <input type="text" name="userfaceimgurl" disabled placeholder="一寸头像" autocomplete="off" class="layui-input layui-disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学生描述</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="description" placeholder="学生描述" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -122,5 +126,10 @@
             </form>
         </div>
     </div>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script type="text/javascript" src="/js/xcity.js"></script>
+    <script src="/js/updatestudentroll.js"></script>
 </body>
 </html>

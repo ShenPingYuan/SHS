@@ -20,7 +20,8 @@ namespace SHS.Web.Profiles
                 .ForMember(d => d.ClassName, o => o.MapFrom(x => x.Class.ClassName))
                 .ForMember(d => d.Age, o => o.MapFrom(x =>DateTime.Now.Year-Convert.ToInt32(x.Birthday.Substring(0,4))));
             CreateMap<Student, StudentInfoDto>()
-                .ForMember(d => d.ClassName, o => o.MapFrom(x => x.Class.ClassName));
+                .ForMember(d => d.ClassName, o => o.MapFrom(x => x.Class.ClassName))
+                .ForMember(d => d.Age, o => o.MapFrom(x => DateTime.Now.Year - Convert.ToInt32(x.Birthday.Substring(0, 4)))); ;
             CreateMap<StudentInfoDto, Student>().ForAllMembers(opt => opt.Condition((src, dest, sourceMember) => sourceMember != null));
         }
     }

@@ -21,13 +21,16 @@ namespace SHS.Web.Controllers.APIControllers
         private readonly ITeacherRepository _teacherRepository;
         private readonly IMapper _mapper;
         private readonly IClassRepository _classRepository;
+        private readonly ICollegeRepository _collegeRepository;
         public ClassesController(IClassRepository classRepository,
             IMapper mapper,
-            ITeacherRepository teacherRepository)
+            ITeacherRepository teacherRepository,
+            ICollegeRepository collegeRepository)
         {
             _classRepository = classRepository;
             _mapper = mapper;
             _teacherRepository = teacherRepository;
+            _collegeRepository = collegeRepository;
         }
         [HttpGet]
         public async Task<ActionResult<ResultData>> GetClasses()
@@ -67,12 +70,13 @@ namespace SHS.Web.Controllers.APIControllers
                 return BadRequest();
             }
             var @class = await _classRepository.LoadEntitiesAsIQueryable(x => x.ClassId == id)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
             if (@class == null)
             {
                 return NotFound();
             }
-            @class = _mapper.Map<Class>(dto);
+            _mapper.Map(dto,@class);
             await _classRepository.EditEntityAsync(@class);
             return NoContent();
         }

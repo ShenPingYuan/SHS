@@ -66,7 +66,21 @@ namespace SHS.Web.Controllers.APIControllers
             {
                 return NotFound();
             }
-            return _mapper.Map<StudentInfoDto>(student);
+            var dto = _mapper.Map<StudentInfoDto>(student);
+            if (student.ClassId != null)
+            {
+                var @class = await _classRepository.LoadEntitiesAsIQueryable(x => x.ClassId == student.ClassId)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+                if (@class != null)
+                {
+                    var college =await _classRepository.LoadEntitiesAsIQueryable(x => x.CollegeId == @class.CollegeId)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+                    dto.CollegeId = college.CollegeId;
+                }
+            }
+            return dto;
         }
         [HttpPost]
         public async Task<ActionResult> Add([FromBody]StudentAddDto dto)
@@ -83,8 +97,7 @@ namespace SHS.Web.Controllers.APIControllers
                 .Include(x => x.Students).OrderBy(x => x.Students.Count()).FirstOrDefaultAsync();
             if (!(@class != null && @class.Students.Count() < 50))
             {
-                var test = dto.CollegeId.ToString().Substring(dto.CollegeId.ToString().Length - 2, 2) + (college.Classes.Count() + 1);
-                int classId = Convert.ToInt32(dto.CollegeId.ToString()
+                int classId = Convert.ToInt32(DateTime.Now.Year.ToString()+dto.CollegeId.ToString()
                     .Substring(dto.CollegeId.ToString().Length - 2, 2) + (college.Classes.Count() + 1));
                 @class = new Class
                 {

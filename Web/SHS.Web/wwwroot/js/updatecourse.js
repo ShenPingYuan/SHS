@@ -49,7 +49,7 @@
                 "coursename": data.field.coursename,
                 "englishname": data.field.englishname,
                 "coursescore": parseInt(data.field.coursescore),
-                "iscompulsory": data.field.iscompulsory == "on" ? true : false,,
+                "iscompulsory": data.field.iscompulsory == "on" ? true : false,
             }),
             contentType: "application/json;",
             success: function (res) {

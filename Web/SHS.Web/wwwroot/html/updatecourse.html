@@ -23,7 +23,7 @@
         <div class="layui-row">
             <form class="layui-form layui-form-pane">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">学院名</label>
+                    <label class="layui-form-label">课程名</label>
                     <div class="layui-input-block">
                         <input type="text" name="coursename" required lay-verify="required" placeholder="请输入课程名字" autocomplete="off" class="layui-input">
                     </div>
@@ -31,7 +31,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">EnglishName</label>
                     <div class="layui-input-block">
-                        <input type="text" name="englishname" required lay-verify="required" placeholder="请输入课程英文名" autocomplete="off" class="layui-input">
+                        <input type="text" name="englishname" placeholder="请输入课程英文名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -40,7 +40,7 @@
                         <input type="text" name="coursescore" required lay-verify="required" placeholder="请输入课程学分" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" pane>
                     <label class="layui-form-label">是否为必修课</label>
                     <div class="layui-input-block">
                         <input type="checkbox" name="iscompulsory" lay-skin="switch" lay-text="必修|选修">

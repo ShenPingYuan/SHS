@@ -13,8 +13,10 @@ namespace SHS.Web.Profiles
     {
         public ClassProfile()
         {
-            CreateMap<Class, ClassDto>().ForMember(d => d.CollegeName, o => o.MapFrom(x => x.College.CollegeName));
-            CreateMap<ClassDto, Class>();
+            CreateMap<Class, ClassDto>().ForMember(d => d.CollegeName, o => o.MapFrom(x => x.College.CollegeName))
+                .ForMember(d=>d.TeacherId,o=>o.MapFrom(x=>x.InstructorId));
+            CreateMap<ClassDto, Class>().ForMember(d => d.InstructorId, o => o.MapFrom(x => x.TeacherId))
+                .ForAllMembers(opt => opt.Condition((src, dest, sourceMember) => sourceMember != null));
         }
     }
 }

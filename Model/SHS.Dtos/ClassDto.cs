@@ -21,5 +21,6 @@ namespace SHS.Dtos
         public string InstructorName { get; set; }
         public int CollegeId { get; set; }
         public string CollegeName { get; set; }
+        public string EnglishName { get; set; }
     }
 }

@@ -62,5 +62,7 @@ namespace SHS.Dtos
         /// 家庭地址/区
         /// </summary>
         public string Area { get; set; }
+        public int CollegeId { get; set; }
+        public string Age { get; set; }
     }
 }
