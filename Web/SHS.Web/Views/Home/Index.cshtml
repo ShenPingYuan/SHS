@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using SHS.Entities
+@using SHS.Core
 @model SHS.Dtos.HomeViewModel
 @inject SignInManager<ApplicationIdentityUser> SignInManager
 @inject UserManager<ApplicationIdentityUser> UserManager
@@ -90,168 +91,211 @@
     <div class="left-nav">
         <div id="side-nav">
             <ul id="nav">
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="用户管理">&#xe6b8;</i>
-                        <cite>用户管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('用户列表', '/html/UserList.html', true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>用户列表</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="alert('暂未实现');">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>搜索用户</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('职位列表', '/html/RoleList.html', true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>职位列表</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="新生管理">&#xe723;</i>
-                        <cite>新生管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('新生列表','/html/newstudentlist.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>新生列表</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('新生录入','/html/newstudentadd.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>新生录入</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="学院管理">&#xe723;</i>
-                        <cite>学院管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('学院列表','/html/collegeList.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>学院列表</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="班级管理">&#xe723;</i>
-                        <cite>班级管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('班级列表','/html/classlist.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>班级列表</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="课程管理">&#xe726;</i>
-                        <cite>课程管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('课程列表','/html/courselist.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>课程列表</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('课程分配（选课）','/html/selectcourse.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>课程分配（选课）</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="学籍管理">&#xe6ce;</i>
-                        <cite>学籍管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('学生学籍信息列表','/html/studentrolllist.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>学生学籍信息列表</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="alert('暂未实现');">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>学生学籍信息查询</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="成绩管理">&#xe6b4;</i>
-                        <cite>成绩管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="xadmin.add_tab('学生成绩录入修改','/html/entryscore.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>学生成绩录入修改</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('成绩查询','/html/searchscore.html',true)">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>成绩查询</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a onclick="alert('暂未实现');">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>成绩统计</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont left-nav-li" lay-tips="教务消息">&#xe6b4;</i>
-                        <cite>教务消息</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a onclick="alert('暂未实现');">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>文章列表</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if (User.IsInRole(Position.管理员.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="用户管理">&#xe6b8;</i>
+                            <cite>用户管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('用户列表', '/html/UserList.html', true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>用户列表</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="alert('暂未实现');">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>搜索用户</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('职位列表', '/html/RoleList.html', true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>职位列表</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.招生办.ToString()) || User.IsInRole(Position.管理员.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="新生管理">&#xe723;</i>
+                            <cite>新生管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('新生列表','/html/newstudentlist.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>新生列表</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('新生录入','/html/newstudentadd.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>新生录入</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.管理员.ToString()) || User.IsInRole(Position.校长.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="学院管理">&#xe723;</i>
+                            <cite>学院管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('学院列表','/html/collegeList.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>学院列表</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.管理员.ToString())
+                   || User.IsInRole(Position.校长.ToString())
+                   || User.IsInRole(Position.院长.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="班级管理">&#xe723;</i>
+                            <cite>班级管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('班级列表','/html/classlist.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>班级列表</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.管理员.ToString()) 
+                    || User.IsInRole(Position.校长.ToString())
+                    || User.IsInRole(Position.院长.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="课程管理">&#xe726;</i>
+                            <cite>课程管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('课程列表','/html/courselist.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>课程列表</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('课程分配（选课）','/html/selectcourse.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>课程分配（选课）</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.管理员.ToString()) 
+                    || User.IsInRole(Position.院长.ToString())
+                    ||User.IsInRole(Position.校长.ToString())
+                    || User.IsInRole(Position.辅导员.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="学籍管理">&#xe6ce;</i>
+                            <cite>学籍管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('学生学籍信息列表','/html/studentrolllist.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>学生学籍信息列表</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="alert('暂未实现');">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>学生学籍信息查询</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole(Position.管理员.ToString()) 
+                    || User.IsInRole(Position.教师.ToString())
+                    || User.IsInRole(Position.教授.ToString())
+                    || User.IsInRole(Position.辅导员.ToString())
+                    || User.IsInRole(Position.院长.ToString()))
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="成绩管理">&#xe6b4;</i>
+                            <cite>成绩管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('学生成绩录入修改','/html/entryscore.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>学生成绩录入修改</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('成绩查询','/html/searchscore.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>成绩查询</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="alert('暂未实现');">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>成绩统计</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (true)
+                {
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="教务消息">&#xe6b4;</i>
+                            <cite>教务消息</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="alert('暂未实现');">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>文章列表</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+
+
+
+
+
+
+
             </ul>
         </div>
     </div>

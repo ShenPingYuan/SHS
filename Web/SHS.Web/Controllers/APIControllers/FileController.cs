@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using SHS.Core;
 
 namespace SHS.Web.Controllers.APIControllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : ControllerBase

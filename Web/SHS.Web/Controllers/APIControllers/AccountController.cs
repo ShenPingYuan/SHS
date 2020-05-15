@@ -112,6 +112,7 @@ namespace SHS.Web.APIControllers.Controllers
             }
             return new ResultData(ReturnCode.Error, -1, "注册失败", null);
         }
+        [Authorize]
         [HttpPost]
         [Route("LogOutApi")]
         public async Task LogOutApi()

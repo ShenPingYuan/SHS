@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SHS.Core;
@@ -13,6 +14,7 @@ using SHS.IRepository;
 
 namespace SHS.Web.Controllers.APIControllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentsController : ControllerBase
