@@ -55,7 +55,7 @@ namespace SHS.Entities
         public string Birthday { get; set; }
         public int? CourseId { get; set; }
         public Course Course { get; set; }
-        public int? ColleageId { get; set; }
+        public int? CollegeId { get; set; }
         public College College { get; set; }
         /// <summary>
         /// 家庭地址/省

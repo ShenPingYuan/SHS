@@ -38,6 +38,8 @@ layui.use('table',
                     member_del(this, data.teacherId);
                 } else if (layEvent === "changeStatus") {
                     member_stop(this, data.teacherId);
+                } else if (layEvent === "edit") {
+                    xadmin.open('编辑', '/html/UpdateTeacher.html?id=' + data.teacherId);
                 }
             });
         //头工具栏事件

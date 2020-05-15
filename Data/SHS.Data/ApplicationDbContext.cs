@@ -37,7 +37,7 @@ namespace SHS.Data
 
                 entity.HasOne(l => l.College)
                     .WithMany(l => l.Teachers)
-                    .HasForeignKey(l => l.ColleageId)
+                    .HasForeignKey(l => l.CollegeId)
                     .OnDelete(DeleteBehavior.SetNull);
             });
             builder.Entity<College>(entity =>

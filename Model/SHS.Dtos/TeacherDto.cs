@@ -64,6 +64,8 @@ namespace SHS.Dtos
         /// </summary>
         public string Area { get; set; }
         public int? CourseId { get; set; }
-        public int? ColleageId { get; set; }
+        public int? CollegeId { get; set; }
+        public string Age { get; set; }
+        public string RoleId { get; set; }
     }
 }

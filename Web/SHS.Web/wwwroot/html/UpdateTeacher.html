@@ -17,7 +17,7 @@
         <div class="layui-form-item layui-row layui-col-xs12">
             <label class="layui-form-label">教职工号</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input teacherId layui-disabled" value="" disabled name="teacherId" lay-verify="teacherId" placeholder="教职工号">
+                <input type="text" class="layui-input teacherid layui-disabled" value="" disabled name="teacherid" lay-verify="teacherId" placeholder="教职工号">
             </div>
         </div>
         <div class="layui-form-item layui-row layui-col-xs12">
@@ -29,51 +29,42 @@
         <div class="layui-form-item layui-row layui-col-xs12">
             <label class="layui-form-label">教师邮箱</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input userEmail layui-disabled" value="" disabled name="userEmail" lay-verify="userEmail" placeholder="教职工号">
+                <input type="text" class="layui-input userEmail layui-disabled" value="" disabled name="userEmail" lay-verify="userEmail" placeholder="邮箱">
             </div>
         </div>
         <div class="layui-form-item layui-row layui-col-xs12">
             <label class="layui-form-label">电话号码</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input phoneNumber layui-disabled" value="" disabled name="phoneNumber" lay-verify="phoneNumber" placeholder="教职工号">
+                <input type="text" class="layui-input phoneNumber layui-disabled" value="" disabled name="phoneNumber" lay-verify="phoneNumber" placeholder="电话号码">
             </div>
         </div>
         <div class="layui-form-item layui-row layui-col-xs12">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input age layui-disabled" value="" disabled name="age" lay-verify="age" placeholder="教职工号">
+                <input type="text" class="layui-input age layui-disabled" value="" disabled name="age" lay-verify="age" placeholder="年龄">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">教授的课程</label>
             <div class="layui-input-block">
-                <select name="courseId" lay-verify="" lay-search>
+                <select name="courseid" lay-verify="" lay-search>
                     <option value="">给老师分配课程</option>
-                    <option value="010">layer</option>
-                    <option value="021">form</option>
-                    <option value="0571">layim</option>
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">所属学院</label>
             <div class="layui-input-block">
-                <select name="collogeId" lay-verify="" lay-search>
+                <select name="collegeid" lay-verify="" lay-search>
                     <option value="">将教师分配至</option>
-                    <option value="010">layer</option>
-                    <option value="021">form</option>
-                    <option value="0571">layim</option>
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">教师职位</label>
             <div class="layui-input-block">
-                <select name="position" lay-verify="" lay-search>
+                <select name="roleid" lay-verify="" lay-search>
                     <option value="">给教师分配职位</option>
-                    <option value="010">layer</option>
-                    <option value="021">form</option>
-                    <option value="0571">layim</option>
                 </select>
             </div>
         </div>
@@ -85,12 +76,13 @@
         </div>
         <div class="layui-form-item layui-row layui-col-xs12">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="addUser">立即添加</button>
+                <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="update">更改</button>
                 <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
             </div>
         </div>
     </form>
     <script type="text/javascript" src="/lib/layui/layui.js"></script>
-    <script type="text/javascript" src="/js/userAdd.js"></script>
+    <script src="/js/xadmin.js"></script>
+    <script type="text/javascript" src="/js/updateteacher.js"></script>
 </body>
 </html>

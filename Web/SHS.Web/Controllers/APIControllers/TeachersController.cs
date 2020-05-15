@@ -20,39 +20,52 @@ namespace SHS.Web.Controllers.APIControllers
     public class TeachersController : ControllerBase
     {
         private readonly UserManager<ApplicationIdentityUser> _userManager;
+        private readonly RoleManager<ApplicationIdentityRole> _roleManager;
         private readonly ITeacherRepository _teacherRepository;
         private readonly IMapper _mapper;
         public TeachersController(UserManager<ApplicationIdentityUser> userManager,
             ITeacherRepository teacherRepository,
-            IMapper mapper)
+            IMapper mapper,
+            RoleManager<ApplicationIdentityRole> roleManager)
         {
             _userManager = userManager;
             _teacherRepository = teacherRepository;
             _mapper = mapper;
+            _roleManager = roleManager;
         }
         // GET: api/Teacher
         [HttpGet]
         public async Task<ActionResult<ResultData>> GetTeachers()
         {
-            var teachers =await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
+            var teachers = await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
             var dtos = _mapper.Map<IEnumerable<ListTeacherDto>>(teachers);
             return new ResultData(ReturnCode.Succeed, dtos.Count(), "教师列表", dtos);
         }
         [HttpGet("{teacherId}")]
         public async Task<ActionResult<TeacherDto>> GetTeachers(int teacherId)
         {
-            var teacher =await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId)
-                .Include(x=>x.Course)
-                .Include(x=>x.College)
+            var teacher = await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId)
+                .Include(x => x.Course)
+                .Include(x => x.College)
                 .FirstOrDefaultAsync();
-            if (teacher == null)
+            var user = await _userManager.Users.Where(x => x.TeacherId == teacher.TeacherId).FirstOrDefaultAsync();
+            if (teacher == null || user == null)
             {
                 return NotFound();
             }
-            
+            var roleName = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            var roleId = "";
+            if (roleName != null)
+            {
+                if (await _roleManager.RoleExistsAsync(roleName))
+                {
+                    roleId = (await _roleManager.FindByNameAsync(roleName))?.Id;
+                }
+            }
             var dto = _mapper.Map<TeacherDto>(teacher);
             dto.CourseName = teacher.Course?.CourseName;
             dto.CollegeName = teacher.College?.CollegeName;
+            dto.RoleId = roleId;
             return Ok(dto);
         }
         // POST: api/Teachers
@@ -118,41 +131,37 @@ namespace SHS.Web.Controllers.APIControllers
         }
         // PUT: api/Teachers/5
         [HttpPut("{teacherId}")]
-        public async Task<ActionResult<ResultData>> UpdateUser(int teacherId,[FromBody]TeacherDto dto)
+        public async Task<ActionResult> UpdateUser(int teacherId, [FromBody]UpdateTeacherDto dto)
         {
             if (teacherId != dto.TeacherId)
             {
                 return BadRequest();
             }
-            var teacher =await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId)
+            var teacher = await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId)
                 .FirstOrDefaultAsync();
             if (teacher == null)
             {
                 return NotFound();
             }
-            teacher = _mapper.Map<Teacher>(dto);
+            _mapper.Map(dto, teacher);
             var result = await _teacherRepository.EditEntityAsync(teacher);
-            if (result)
-            {
-                return new ResultData(ReturnCode.Succeed, -1, "更新成功", null);
-            }
-            return new ResultData(ReturnCode.Error, -1, "更新失败", null);
+            return NoContent();
         }
         [HttpDelete("{teacherId}")]
         public async Task<ActionResult> Delete(int teacherId)
         {
-            var teacher =await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId).FirstOrDefaultAsync();
+            var teacher = await _teacherRepository.LoadEntitiesAsIQueryable(x => x.TeacherId == teacherId).FirstOrDefaultAsync();
             if (teacher == null)
             {
                 return NotFound();
             }
-            var result=await _teacherRepository.DeleteEntityAsync(teacher);
+            var result = await _teacherRepository.DeleteEntityAsync(teacher);
             return NoContent();
         }
         [HttpDelete]
         public async Task<ActionResult> DeleteList([FromForm]List<int> teacherIds)
         {
-            var Administrator = _userManager.Users.FirstOrDefault(x=>x.UserName=="2439739932");
+            var Administrator = _userManager.Users.FirstOrDefault(x => x.UserName == "2439739932");
             teacherIds.Remove(Administrator.TeacherId);
             var teachers = await _teacherRepository
                 .LoadEntitiesAsIQueryable(x => teacherIds.Contains(x.TeacherId))
@@ -163,17 +172,17 @@ namespace SHS.Web.Controllers.APIControllers
         [HttpGet("checkuser/{username}")]
         public async Task<ActionResult<bool>> CheckUser(string username)
         {
-            var user =await _userManager.FindByNameAsync(username);
+            var user = await _userManager.FindByNameAsync(username);
             if (user != null)
             {
-                return false ;
+                return false;
             }
             return true;
         }
         [HttpGet("Deans")]
         public async Task<ActionResult<IEnumerable<DeanTeacherDto>>> GetDeans()
         {
-            var teachers =await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
+            var teachers = await _teacherRepository.GetAllEntitiesAsIQueryable().ToListAsync();
             var deans = _mapper.Map<IEnumerable<DeanTeacherDto>>(teachers);
             return Ok(deans);
         }

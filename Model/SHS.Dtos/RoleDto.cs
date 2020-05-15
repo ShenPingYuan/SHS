@@ -7,9 +7,8 @@ namespace SHS.Dtos
 {
     public class RoleDto
     {
-        [Required]
+        public string Id { get; set; }
         public int PositionGrade { get; set; }
-        [Required]
         public string RoleName { get; set; }
     }
 }

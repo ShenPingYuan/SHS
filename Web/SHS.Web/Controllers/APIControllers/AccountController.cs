@@ -105,7 +105,10 @@ namespace SHS.Web.APIControllers.Controllers
             var result = await _userManager.CreateAsync(user, userDto.Password);
             if (result.Succeeded)
             {
-                return new ResultData(ReturnCode.Succeed, -1, "注册成功", null);
+                if ((await _userManager.AddToRoleAsync(user, Position.游客.ToString())).Succeeded)
+                {
+                    return new ResultData(ReturnCode.Succeed, -1, "注册成功", null);
+                }
             }
             return new ResultData(ReturnCode.Error, -1, "注册失败", null);
         }
@@ -176,7 +179,7 @@ namespace SHS.Web.APIControllers.Controllers
                 return NotFound();
             }
             teacher = _mapper.Map<Teacher>(userDto);
-            var result =await _teacherRepository.EditEntityAsync(teacher);
+            var result = await _teacherRepository.EditEntityAsync(teacher);
             if (result)
             {
                 return NoContent();

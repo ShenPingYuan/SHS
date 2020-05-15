@@ -23,8 +23,10 @@ namespace SHS.Web.Profiles
                 .ForMember(d => d.Age, o => 
                 o.MapFrom(x => DateTime.Now.Year - Convert.ToInt32(x.Birthday.Substring(0, 4))));
 
-            CreateMap<Teacher, TeacherDto>();
+            CreateMap<Teacher, TeacherDto>()
+                .ForMember(d => d.Age, o => o.MapFrom(x => DateTime.Now.Year - Convert.ToInt32(x.Birthday.Substring(0, 4)))); ;
             CreateMap<TeacherDto, Teacher>();
+            CreateMap<UpdateTeacherDto, Teacher>();
             CreateMap<Teacher, DeanTeacherDto>().ForMember(d=>d.DeanName,o=>o.MapFrom(x=>x.TeacherName));
             CreateMap<Teacher, InstructorTeacherDto>().ForMember(d=>d.InstructorName, o=>o.MapFrom(x=>x.TeacherName));
         }
